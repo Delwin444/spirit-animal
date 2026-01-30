@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Spirit Animal"
+run/main_scene="uid://cygklepcv3ow3"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
