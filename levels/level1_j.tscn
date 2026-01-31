@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://y4yvs0gdqw3a"]
+
+[ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_2amg0"]
+[ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="2_5ser7"]
+[ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="3_cpj4g"]
+[ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_qdvjk"]
+[ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="5_d2fby"]
+
+[node name="Level1" type="Node2D" unique_id=1538598293]
+
+[node name="Player" parent="." unique_id=1880371565 instance=ExtResource("1_2amg0")]
+position = Vector2(199, 866)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2038162673]
+limit_top = 0
+limit_bottom = 1080
+
+[node name="TileMapLayer" parent="." unique_id=853132546 instance=ExtResource("2_5ser7")]
+
+[node name="ParallaxBackground" parent="." unique_id=2123385024 instance=ExtResource("3_cpj4g")]
+follow_viewport_enabled = true
+
+[node name="Chest" parent="." unique_id=842528575 instance=ExtResource("4_qdvjk")]
+position = Vector2(1621, 654)
+scale = Vector2(4, 4)
+mask_scene = ExtResource("5_d2fby")
+type = "gold"

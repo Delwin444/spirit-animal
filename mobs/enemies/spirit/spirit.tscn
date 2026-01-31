@@ -11,6 +11,10 @@ height = 128.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
 radius = 129.0155
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
+radius = 46.0
+height = 138.0
+
 [node name="Spirit" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
 script = ExtResource("1_8wsbx")
 behavior = NodePath("Follow")
@@ -19,7 +23,7 @@ behavior = NodePath("Follow")
 scale = Vector2(0.546875, 1)
 texture = ExtResource("1_5hndp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1997082231]
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
 shape = SubResource("CapsuleShape2D_8wsbx")
 
 [node name="Follow" type="Node" parent="." unique_id=904195158]
@@ -31,3 +35,9 @@ unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
 shape = SubResource("CircleShape2D_puyys")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
+shape = SubResource("CapsuleShape2D_puyys")
