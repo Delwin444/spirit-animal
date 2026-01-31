@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
 [ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_b3oru"]
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="3_b3oru"]
+[ext_resource type="Texture2D" uid="uid://bnm85qebnkaoe" path="res://levels/GameMood_NoCharacters.jpg" id="4_ua5ty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
 size = Vector2(127, 127)
@@ -10,21 +11,14 @@ size = Vector2(127, 127)
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
 [node name="Player" parent="." unique_id=1880371565 instance=ExtResource("1_pdtm5")]
-position = Vector2(19, 36)
-acceleration = 700
-deceleration = 1400
-max_fall_speed = 250
-jump_horizontal_distance = 80
-jump_height = 50
-jump_time_to_peak = 0.37
-jump_time_to_descent = 0.3
-jump_cut_value = 15
-double_jump_height = 30
-double_jump_time_to_peak = 0.3
-double_jump_time_to_descent = 0.25
+position = Vector2(199, 866)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2038162673]
+limit_top = 0
+limit_bottom = 1080
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1565633104]
-position = Vector2(129, 34)
+position = Vector2(129, 864)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1398167857]
 position = Vector2(62.5, 111.5)
@@ -35,7 +29,7 @@ position = Vector2(63, 112)
 texture = ExtResource("2_b3oru")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1631494404]
-position = Vector2(2, -7)
+position = Vector2(2, 823)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=538844117]
 position = Vector2(62.5, 111.5)
@@ -46,7 +40,13 @@ position = Vector2(63, 112)
 texture = ExtResource("2_b3oru")
 
 [node name="DefaultMask" parent="." unique_id=1160054275 instance=ExtResource("3_b3oru")]
-position = Vector2(216, 62)
+position = Vector2(216, 892)
 
 [node name="DefaultMask2" parent="." unique_id=983028436 instance=ExtResource("3_b3oru")]
-position = Vector2(81, 29)
+position = Vector2(81, 859)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=96510568]
+z_index = -1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_ua5ty")
