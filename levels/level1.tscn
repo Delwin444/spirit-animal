@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://csmw6ycqm5qk"]
 
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
-[ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_b3oru"]
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="3_b3oru"]
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="4_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
-size = Vector2(127, 127)
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -17,28 +13,6 @@ position = Vector2(199, 866)
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2038162673]
 limit_top = 0
 limit_bottom = 1080
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1565633104]
-position = Vector2(129, 864)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1398167857]
-position = Vector2(62.5, 111.5)
-shape = SubResource("RectangleShape2D_ua5ty")
-
-[node name="Icon" type="Sprite2D" parent="StaticBody2D2" unique_id=860759402]
-position = Vector2(63, 112)
-texture = ExtResource("2_b3oru")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1631494404]
-position = Vector2(2, 823)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=538844117]
-position = Vector2(62.5, 111.5)
-shape = SubResource("RectangleShape2D_ua5ty")
-
-[node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=1579931819]
-position = Vector2(63, 112)
-texture = ExtResource("2_b3oru")
 
 [node name="DefaultMask" parent="." unique_id=1160054275 instance=ExtResource("3_b3oru")]
 position = Vector2(216, 892)
