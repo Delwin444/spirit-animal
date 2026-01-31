@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
 [ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_b3oru"]
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="3_b3oru"]
-[ext_resource type="Texture2D" uid="uid://bnm85qebnkaoe" path="res://levels/GameMood_NoCharacters.jpg" id="4_ua5ty"]
+[ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua5ty"]
 size = Vector2(127, 127)
@@ -45,8 +45,5 @@ position = Vector2(216, 892)
 [node name="DefaultMask2" parent="." unique_id=983028436 instance=ExtResource("3_b3oru")]
 position = Vector2(81, 859)
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=96510568]
-z_index = -1
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("4_ua5ty")
+[node name="ParallaxBackground" parent="." unique_id=2123385024 instance=ExtResource("4_ua5ty")]
+follow_viewport_enabled = true

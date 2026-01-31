@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bl5n6kt0j688g"]
+
+[ext_resource type="Texture2D" uid="uid://bnm85qebnkaoe" path="res://levels/GameMood_NoCharacters.jpg" id="1_nm1fo"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" unique_id=2123385024]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=72736993]
+repeat_size = Vector2(1920, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1498773269]
+texture = ExtResource("1_nm1fo")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1920, 1080)
