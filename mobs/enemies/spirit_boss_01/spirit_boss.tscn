@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b0pthl1wnxnmb"]
+
+[ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_ui7ij"]
+[ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_ov1qc"]
+[ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="3_j6aa0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
+radius = 34.0
+height = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
+radius = 129.0155
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
+radius = 46.0
+height = 138.0
+
+[node name="Spirit" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
+script = ExtResource("1_ui7ij")
+behavior = NodePath("Follow")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
+scale = Vector2(0.546875, 1)
+texture = ExtResource("2_ov1qc")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
+shape = SubResource("CapsuleShape2D_8wsbx")
+
+[node name="Follow" type="Node" parent="." unique_id=904195158]
+unique_name_in_owner = true
+script = ExtResource("3_j6aa0")
+
+[node name="NoticeArea" type="Area2D" parent="." unique_id=1124821796]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
+shape = SubResource("CircleShape2D_puyys")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
+shape = SubResource("CapsuleShape2D_puyys")
