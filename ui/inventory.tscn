@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://2ipytf1qk2qe"]
+
+[ext_resource type="PackedScene" uid="uid://ou5ubqn41m3m" path="res://ui/inventory_grid.tscn" id="1_kosh3"]
+
+[node name="Inventory" type="MarginContainer" unique_id=590567742]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=528688391]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer" unique_id=2035480163]
+layout_mode = 2
+color = Color(1, 0, 1, 1)
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=181825616]
+layout_mode = 2
+
+[node name="InventoryGrid" parent="CenterContainer" unique_id=1329791798 instance=ExtResource("1_kosh3")]
+layout_mode = 2
