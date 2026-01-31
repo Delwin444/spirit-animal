@@ -13,6 +13,7 @@ enum chest_type {WHITE_KEY, OLD_KEY, NORMAL_KEY, GOLD_KEY}
 @onready var animation_sprite = %AnimatedSprite2D
 @onready var animation_player = %AnimationPlayer
 @onready var mask_wrapper = %MaskWrapper
+@onready var chest_open_sound = %ChestOpenSound
 
 @export var mask_scene : PackedScene = null
 @export_enum(NORMAL_KEY, OLD_KEY, GOLD_KEY, WHITE_KEY) var type: String = NORMAL_KEY
@@ -40,6 +41,7 @@ func open() -> void:
 	if mask_scene:
 		var mask = mask_scene.instantiate()
 		GameState.add_mask(mask)
+	chest_open_sound.play()
 	animation_sprite.play(str("opening_", type))
 	animation_sprite.animation_finished.connect(transfer_mask)
 	already_opened = true
