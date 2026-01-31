@@ -53,9 +53,10 @@ var active_mask_sprite: Sprite2D;
 @onready var attacking = false
 
 @onready var animation = $AnimatedSprite2D/BasicAttack/BasicAttackAnimationPlayer
-@onready var top_bottom_attack_animation = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer
-
-
+@onready var top_attack_animation = $AnimatedSprite2D/BasicAttack/SwordTop/TopAttackAnimation
+@onready var bottom_attack_animation = $AnimatedSprite2D/BasicAttack/SwordBottom/BottomAttackAnimation
+@onready var left_attack_animation = $AnimatedSprite2D/BasicAttack/SwordLeft/LeftAttackAnimation
+@onready var right_attack_animation = $AnimatedSprite2D/BasicAttack/SwordRight/RightAttackAnimation
 
 # Dashing
 @onready var dashing = false
@@ -70,15 +71,15 @@ var is_invincible = false
 func _ready() -> void:
 	_transition_to_state(current_state)
 	GameState.player = self
-	animation.animation_finished.connect(_on_attack_finished)
-	top_bottom_attack_animation.animation_finished.connect(_on_attack_finished)
-
+	
+	# Connect all attack animations to the finished handler
+	top_attack_animation.animation_finished.connect(_on_attack_finished)
+	bottom_attack_animation.animation_finished.connect(_on_attack_finished)
+	left_attack_animation.animation_finished.connect(_on_attack_finished)
+	right_attack_animation.animation_finished.connect(_on_attack_finished)
 
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("basic_attack")):
-		attack()
-	if Input.is_action_just_pressed("dash"):
-		dash()
+	pass
 
 func attack():
 	if attacking:
@@ -86,40 +87,24 @@ func attack():
 	
 	attacking = true
 	
-	# Check if pressing up
+	# Check directional input and play corresponding attack
 	if Input.is_action_pressed("move_up"):
-		# Attack upward
-		var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
-		top_bottom_node.scale.y = 1  # Normal orientation for up
-		top_bottom_attack_animation.play("attack_top_bottom")
+		top_attack_animation.play("top_attack")
 	elif Input.is_action_pressed("move_down"):
-		# Attack downward (only when on ground)
-		var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
-		top_bottom_node.scale.y = -1  # Flip for down
-		top_bottom_attack_animation.play("attack_top_bottom")
+		bottom_attack_animation.play("bottom_attack")
+	elif Input.is_action_pressed("move_left"):
+		left_attack_animation.play("left_attack")
+	elif Input.is_action_pressed("move_right"):
+		right_attack_animation.play("right_attack")
 	else:
-		# Normal side attack
-		animation.play("basic_attack_animation")
-		
-		# Flip the attack based on player's facing direction
-		var attack_node = $AnimatedSprite2D/BasicAttack
-		
-		if velocity.x < 0:  # Facing left
-			attack_node.scale.x = -1
-		elif velocity.x > 0:  # Facing right
-			attack_node.scale.x = 1
-		elif animated_sprite.flip_h:  # Use last facing direction
-			attack_node.scale.x = -1
+		# Default attack based on last facing direction
+		if animated_sprite.flip_h:
+			left_attack_animation.play("left_attack")
 		else:
-			attack_node.scale.x = 1
+			right_attack_animation.play("right_attack")
 
 func _on_attack_finished(anim_name: String) -> void:
-	if anim_name in ["basic_attack_animation", "attack_top_bottom"]:
-		attacking = false
-		# Reset the top/bottom node scale to prevent affecting side attacks
-		if anim_name == "attack_top_bottom":
-			var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
-			top_bottom_node.scale.y = 1
+	attacking = false
 
 func dash():
 	if dashing or dash_cooldown_timer > 0:
@@ -142,6 +127,7 @@ func process_dash(delta: float) -> void:
 	
 	if dash_time_left <= 0:
 		dashing = false
+		is_invincible = false
 		print("Iframes over")
 		return
 	
@@ -156,6 +142,10 @@ func _physics_process(delta: float) -> void:
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
 	
+	# CHECK ATTACK INPUT FIRST - before any state processing
+	if Input.is_action_just_pressed("basic_attack"):
+		attack()
+	
 	# Check for dash input
 	if Input.is_action_just_pressed("dash") and not dashing and dash_cooldown_timer <= 0:
 		dash()
@@ -164,7 +154,7 @@ func _physics_process(delta: float) -> void:
 	if dashing:
 		process_dash(delta)
 		move_and_slide()
-		return  # Skip normal state processing
+		return
 	
 	# Normal state processing
 	match current_state:

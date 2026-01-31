@@ -1,22 +1,19 @@
 [gd_scene format=3 uid="uid://cfyr2rpa0h7tp"]
 
 [ext_resource type="Script" uid="uid://dkxb1lx8owxr7" path="res://player/player.gd" id="1_oul6g"]
-[ext_resource type="SpriteFrames" uid="uid://cl0xj6huwoewx" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
+[ext_resource type="SpriteFrames" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="3_g1dw6"]
-[ext_resource type="Script" path="res://player/sprite_2d.gd" id="4_yw30f"]
+[ext_resource type="Script" uid="uid://dv21oahjgfyxx" path="res://player/sprite_2d.gd" id="4_yw30f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
-size = Vector2(18, 7.5)
+size = Vector2(32, 13.125)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
-size = Vector2(9, 17)
-
-[sub_resource type="Animation" id="Animation_qjkh3"]
+[sub_resource type="Animation" id="Animation_yw30f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SwordLeftRigth:disabled")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SwordLeftRigth/SwordSprite:visible")
+tracks/1/path = NodePath("SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,46 +35,49 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_g6k8r"]
-resource_name = "basic_attack_animation"
+[sub_resource type="Animation" id="Animation_qjkh3"]
+resource_name = "right_attack"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SwordLeftRigth:disabled")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.399, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, false, true]
+"values": [true, false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SwordLeftRigth/SwordSprite:visible")
+tracks/1/path = NodePath("SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_boad6"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g6k8r"]
 _data = {
-&"RESET": SubResource("Animation_qjkh3"),
-&"basic_attack_animation": SubResource("Animation_g6k8r")
+&"RESET": SubResource("Animation_yw30f"),
+&"right_attack": SubResource("Animation_qjkh3")
 }
 
-[sub_resource type="Animation" id="Animation_yw30f"]
-length = 0.4
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
+size = Vector2(13.75, 32)
+
+[sub_resource type="Animation" id="Animation_boad6"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SwordTopBottom:disabled")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -89,26 +89,27 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SwordTopBottom/SwordSprite:visible")
+tracks/1/path = NodePath("SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.001),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_boad6"]
-resource_name = "attack_top_bottom"
+[sub_resource type="Animation" id="Animation_rgyib"]
+resource_name = "top_attack"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SwordTopBottom:disabled")
+tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.4),
+"times": PackedFloat32Array(0, 0.0001, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -116,20 +117,148 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SwordTopBottom/SwordSprite:visible")
+tracks/1/path = NodePath("SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true, false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hg6s5"]
 _data = {
-&"RESET": SubResource("Animation_yw30f"),
-&"attack_top_bottom": SubResource("Animation_boad6")
+&"RESET": SubResource("Animation_boad6"),
+&"top_attack": SubResource("Animation_rgyib")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
+size = Vector2(13, 27)
+
+[sub_resource type="Animation" id="Animation_2ieo8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ebec5"]
+resource_name = "bottom_attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yllr7"]
+_data = {
+&"RESET": SubResource("Animation_2ieo8"),
+&"bottom_attack": SubResource("Animation_ebec5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb6p2"]
+size = Vector2(30.75, 13.5)
+
+[sub_resource type="Animation" id="Animation_wodsf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_32hag"]
+resource_name = "left_attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqiix"]
+_data = {
+&"RESET": SubResource("Animation_wodsf"),
+&"left_attack": SubResource("Animation_32hag")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g1dw6"]
@@ -154,37 +283,68 @@ animation = &"Idle"
 
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
 
-[node name="SwordLeftRigth" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=460712776]
-position = Vector2(15, 4.25)
+[node name="SwordRight" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=460712776]
+position = Vector2(23.25, 4.9375)
 shape = SubResource("RectangleShape2D_yw30f")
 disabled = true
 
-[node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordLeftRigth" unique_id=1882493940]
+[node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordRight" unique_id=1882493940]
 visible = false
-position = Vector2(1, 0.7499981)
+position = Vector2(3.249999, 0.7500005)
 rotation = 0.76821375
-scale = Vector2(0.033994272, 0.033994272)
+scale = Vector2(0.06086439, 0.06086439)
 texture = ExtResource("3_g1dw6")
 script = ExtResource("4_yw30f")
 
-[node name="SwordTopBottom" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=1341506192]
-position = Vector2(0, -16)
+[node name="RightAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordRight" unique_id=1050705356]
+libraries/ = SubResource("AnimationLibrary_g6k8r")
+
+[node name="SwordTop" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=1341506192]
+position = Vector2(0.25, -23)
 shape = SubResource("RectangleShape2D_qjkh3")
 disabled = true
 
-[node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordTopBottom" unique_id=673184695]
+[node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordTop" unique_id=673184695]
 visible = false
-position = Vector2(0.9999999, -0.9999999)
+position = Vector2(0.75, -2.750001)
 rotation = -0.7769586
-scale = Vector2(0.033994272, 0.033994272)
+scale = Vector2(0.065122694, 0.065122694)
 texture = ExtResource("3_g1dw6")
 script = ExtResource("4_yw30f")
 
-[node name="BasicAttackAnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack" unique_id=1467381938]
-libraries/ = SubResource("AnimationLibrary_boad6")
+[node name="TopAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordTop" unique_id=1979847843]
+libraries/ = SubResource("AnimationLibrary_hg6s5")
 
-[node name="TopAndBottomAnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack" unique_id=1005225299]
-libraries/ = SubResource("AnimationLibrary_rgyib")
+[node name="SwordBottom" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=907043114]
+position = Vector2(-0.25, 25.5)
+shape = SubResource("RectangleShape2D_8t03j")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordBottom" unique_id=2088313037]
+visible = false
+position = Vector2(-0.25, 3.750001)
+rotation = 2.3594193
+scale = Vector2(0.059431177, 0.05886647)
+texture = ExtResource("3_g1dw6")
+
+[node name="BottomAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordBottom" unique_id=1093443220]
+root_node = NodePath("../Sprite2D")
+libraries/ = SubResource("AnimationLibrary_yllr7")
+
+[node name="SwordLeft" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=1599962281]
+position = Vector2(-23.125, 5)
+shape = SubResource("RectangleShape2D_kb6p2")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordLeft" unique_id=153824708]
+visible = false
+position = Vector2(-3.125, -0.5)
+rotation = 3.9293563
+scale = Vector2(0.062133823, 0.062133823)
+texture = ExtResource("3_g1dw6")
+
+[node name="LeftAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordLeft" unique_id=2085217127]
+libraries/ = SubResource("AnimationLibrary_tqiix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198949386]
 position = Vector2(0, -6)
