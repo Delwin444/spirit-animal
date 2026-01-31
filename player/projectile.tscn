@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dal4nmfq88phc"]
 
 [ext_resource type="Script" uid="uid://b2cl1f0t0j51u" path="res://projectile.gd" id="1_islhu"]
-[ext_resource type="Texture2D" uid="uid://cgg28umdck3tj" path="res://player/player_assets/attack_temp/bulletbill.webp" id="2_q5b1o"]
+[ext_resource type="Texture2D" uid="uid://vcwnftmgqlr4" path="res://player/player_assets/dust_particle.png" id="2_islhu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjidt"]
 radius = 30.016663
@@ -12,9 +12,9 @@ collision_mask = 5
 script = ExtResource("1_islhu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=832870575]
-position = Vector2(-1.9999998, -1.0000001)
-scale = Vector2(0.05756582, 0.05756582)
-texture = ExtResource("2_q5b1o")
+position = Vector2(-3.8146973e-06, 1.1444092e-05)
+scale = Vector2(12.153781, 12.153781)
+texture = ExtResource("2_islhu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=422736759]
 shape = SubResource("CircleShape2D_gjidt")
