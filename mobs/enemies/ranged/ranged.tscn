@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cx7wnye000a7a"]
+
+[ext_resource type="Script" uid="uid://hvgkbhmn3apv" path="res://mobs/enemies/behaviors/keep_distance.gd" id="1_pikvj"]
+[ext_resource type="Script" uid="uid://b8utghq7tmt8j" path="res://mobs/enemies/ranged/ranged.gd" id="1_yfydh"]
+[ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_g14yw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
+radius = 34.0
+height = 128.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
+radius = 529.1597
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
+radius = 46.0
+height = 138.0
+
+[node name="Ranged" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
+script = ExtResource("1_yfydh")
+behavior = NodePath("KeepDistance")
+movement_speed = 10000
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
+scale = Vector2(0.546875, 1)
+texture = ExtResource("2_g14yw")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
+shape = SubResource("CapsuleShape2D_8wsbx")
+script = ExtResource("1_pikvj")
+
+[node name="KeepDistance" type="Node" parent="." unique_id=1707143933]
+unique_name_in_owner = true
+script = ExtResource("1_pikvj")
+
+[node name="NoticeArea" type="Area2D" parent="." unique_id=1124821796]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
+shape = SubResource("CircleShape2D_puyys")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
+shape = SubResource("CapsuleShape2D_puyys")

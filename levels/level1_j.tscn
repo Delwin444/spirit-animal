@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="3_cpj4g"]
 [ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_qdvjk"]
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="5_d2fby"]
+[ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="6_5ser7"]
+[ext_resource type="PackedScene" uid="uid://cx7wnye000a7a" path="res://mobs/enemies/ranged/ranged.tscn" id="7_cpj4g"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -25,3 +27,12 @@ position = Vector2(1621, 654)
 scale = Vector2(4, 4)
 mask_scene = ExtResource("5_d2fby")
 type = "gold"
+
+[node name="Spirit" parent="." unique_id=1291073216 instance=ExtResource("6_5ser7")]
+position = Vector2(940, 837)
+
+[node name="Spirit3" parent="." unique_id=1474487285 instance=ExtResource("6_5ser7")]
+position = Vector2(1268, 702)
+
+[node name="Ranged" parent="." unique_id=47877258 instance=ExtResource("7_cpj4g")]
+position = Vector2(608, 850)

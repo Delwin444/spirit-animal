@@ -15,6 +15,7 @@ var contact_damage_timer : Timer
 @export var contact_damage := 10
 @export var weapon_damage := 30
 @export var contact_damage_timeout := .5
+@export var movement_speed := 5000
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 	contact_damage_timer.one_shot = true
 	contact_damage_timer.wait_time = contact_damage_timeout
 	add_child(contact_damage_timer)
+	behavior.speed = movement_speed
 
 
 func _physics_process(delta: float) -> void:
