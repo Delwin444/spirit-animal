@@ -15,6 +15,10 @@ run/main_scene="uid://cygklepcv3ow3"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*uid://cu7qqx6hy3l23"
+
 [display]
 
 window/stretch/mode="canvas_items"

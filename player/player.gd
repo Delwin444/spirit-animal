@@ -1,3 +1,5 @@
+class_name Player
+
 extends CharacterBody2D
 
 enum State {
@@ -235,3 +237,6 @@ func play_tween_jump() -> void:
 	tween.tween_property(animated_sprite, "scale", Vector2(1.2, 0.8), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(animated_sprite, "scale", Vector2(0.8, 1.2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
+
+func collect_mask(mask: Mask) -> void:
+	GameState.add_mask(mask);

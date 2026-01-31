@@ -8,6 +8,17 @@ size = Vector2(10, 12)
 
 [node name="Player" type="CharacterBody2D" unique_id=1880371565]
 script = ExtResource("1_oul6g")
+acceleration = null
+deceleration = null
+max_fall_speed = null
+jump_horizontal_distance = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+jump_cut_value = null
+double_jump_height = null
+double_jump_time_to_peak = null
+double_jump_time_to_descent = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234592446]
 unique_name_in_owner = true
@@ -18,3 +29,7 @@ animation = &"Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198949386]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_g1dw6")
+
+[node name="MaskPositionMarker" type="Marker2D" parent="." unique_id=2033219103]
+unique_name_in_owner = true
+position = Vector2(1, -10)
