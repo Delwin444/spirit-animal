@@ -49,15 +49,124 @@ var active_mask_sprite: Sprite2D;
 @onready var double_jump_gravity := calculate_jump_gravity(double_jump_height, double_jump_time_to_peak)
 @onready var double_jump_fall_gravity := calculate_fall_gravity(double_jump_height, double_jump_time_to_descent)
 
+# Combat stuff
+@onready var attacking = false
+
+@onready var animation = $AnimatedSprite2D/BasicAttack/BasicAttackAnimationPlayer
+@onready var top_bottom_attack_animation = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer
+
+
+
+# Dashing
+@onready var dashing = false
+@export var dash_speed := 250.0
+@export var dash_duration := 0.2
+@export var dash_cooldown := 0.5
+var dash_time_left := 0.0
+var dash_direction := Vector2.ZERO
+var dash_cooldown_timer := 0.0
+var is_invincible = false
 
 func _ready() -> void:
 	_transition_to_state(current_state)
 	GameState.player = self
+	animation.animation_finished.connect(_on_attack_finished)
+	top_bottom_attack_animation.animation_finished.connect(_on_attack_finished)
 
+
+func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed("basic_attack")):
+		attack()
+	if Input.is_action_just_pressed("dash"):
+		dash()
+
+func attack():
+	if attacking:
+		return
+	
+	attacking = true
+	
+	# Check if pressing up
+	if Input.is_action_pressed("move_up"):
+		# Attack upward
+		var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
+		top_bottom_node.scale.y = 1  # Normal orientation for up
+		top_bottom_attack_animation.play("attack_top_bottom")
+	elif Input.is_action_pressed("move_down"):
+		# Attack downward (only when on ground)
+		var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
+		top_bottom_node.scale.y = -1  # Flip for down
+		top_bottom_attack_animation.play("attack_top_bottom")
+	else:
+		# Normal side attack
+		animation.play("basic_attack_animation")
+		
+		# Flip the attack based on player's facing direction
+		var attack_node = $AnimatedSprite2D/BasicAttack
+		
+		if velocity.x < 0:  # Facing left
+			attack_node.scale.x = -1
+		elif velocity.x > 0:  # Facing right
+			attack_node.scale.x = 1
+		elif animated_sprite.flip_h:  # Use last facing direction
+			attack_node.scale.x = -1
+		else:
+			attack_node.scale.x = 1
+
+func _on_attack_finished(anim_name: String) -> void:
+	if anim_name in ["basic_attack_animation", "attack_top_bottom"]:
+		attacking = false
+		# Reset the top/bottom node scale to prevent affecting side attacks
+		if anim_name == "attack_top_bottom":
+			var top_bottom_node = $AnimatedSprite2D/BasicAttack/TopAndBottomAnimationPlayer.get_parent()
+			top_bottom_node.scale.y = 1
+
+func dash():
+	if dashing or dash_cooldown_timer > 0:
+		return
+	
+	dashing = true
+	is_invincible = true
+	dash_time_left = dash_duration
+	dash_cooldown_timer = dash_cooldown
+	
+	# Determine dash direction
+	if direction_x != 0:
+		dash_direction = Vector2(direction_x, 0)
+	else:
+		# Dash in facing direction if not moving
+		dash_direction = Vector2(-1 if animated_sprite.flip_h else 1, 0)
+
+func process_dash(delta: float) -> void:
+	dash_time_left -= delta
+	
+	if dash_time_left <= 0:
+		dashing = false
+		print("Iframes over")
+		return
+	
+	# Set velocity to dash speed
+	velocity.x = dash_direction.x * dash_speed
+	velocity.y = 0  # Cancel gravity
 
 func _physics_process(delta: float) -> void:
 	direction_x = signf(Input.get_axis("move_left", "move_right"))
-
+	
+	# Update dash cooldown
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+	
+	# Check for dash input
+	if Input.is_action_just_pressed("dash") and not dashing and dash_cooldown_timer <= 0:
+		dash()
+	
+	# If dashing, override normal behavior
+	if dashing:
+		process_dash(delta)
+		move_and_slide()
+		return  # Skip normal state processing
+	
+	# Normal state processing
 	match current_state:
 		State.GROUND:
 			process_ground_state(delta)
@@ -65,7 +174,7 @@ func _physics_process(delta: float) -> void:
 			process_jump_state(delta)
 		State.FALL:
 			process_fall_state(delta)
-
+	
 	apply_gravity(delta)
 	move_and_slide()
 
