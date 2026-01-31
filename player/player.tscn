@@ -73,7 +73,7 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_yw30f"]
-length = 0.001
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -93,10 +93,10 @@ tracks/1/path = NodePath("SwordTopBottom/SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_boad6"]
@@ -173,6 +173,7 @@ shape = SubResource("RectangleShape2D_qjkh3")
 disabled = true
 
 [node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordTopBottom" unique_id=673184695]
+visible = false
 position = Vector2(0.9999999, -0.9999999)
 rotation = -0.7769586
 scale = Vector2(0.033994272, 0.033994272)
