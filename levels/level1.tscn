@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="3_b3oru"]
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="4_61w3m"]
+[ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_pdpul"]
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
@@ -14,13 +15,13 @@ position = Vector2(199, 866)
 limit_top = 0
 limit_bottom = 1080
 
-[node name="DefaultMask" parent="." unique_id=1160054275 instance=ExtResource("3_b3oru")]
-position = Vector2(216, 892)
-
-[node name="DefaultMask2" parent="." unique_id=983028436 instance=ExtResource("3_b3oru")]
-position = Vector2(81, 859)
-
 [node name="TileMapLayer" parent="." unique_id=853132546 instance=ExtResource("4_61w3m")]
 
 [node name="ParallaxBackground" parent="." unique_id=2123385024 instance=ExtResource("4_ua5ty")]
 follow_viewport_enabled = true
+
+[node name="Chest" parent="." unique_id=842528575 instance=ExtResource("4_pdpul")]
+position = Vector2(1621, 654)
+scale = Vector2(4, 4)
+mask_scene = ExtResource("3_b3oru")
+type = "gold"
