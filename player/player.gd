@@ -32,7 +32,10 @@ var jump_released := false
 var coyote_time_active := false
 var jump_count := 0
 
+var active_mask_sprite: Sprite2D;
+
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
+@onready var mask_position_marker: Marker2D = %MaskPositionMarker
 
 # Primary jump calculations
 @onready var max_speed := calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)
@@ -238,5 +241,17 @@ func play_tween_jump() -> void:
 	tween.tween_property(animated_sprite, "scale", Vector2(0.8, 1.2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
 
+
 func collect_mask(mask: Mask) -> void:
-	GameState.add_mask(mask);
+	GameState.add_mask(mask)
+	
+	if (active_mask_sprite is not Sprite2D):
+		active_mask_sprite = Sprite2D.new()
+		
+	active_mask_sprite.texture = mask.texture
+	active_mask_sprite.position = mask_position_marker.position
+	active_mask_sprite.scale = mask.scale
+	
+	if !active_mask_sprite.get_parent():
+		self.add_child(active_mask_sprite);
+	
