@@ -1,6 +1,6 @@
 extends Enemy
 
-class_name Spirit
+class_name Spirit_Boss
 
 func _ready() -> void:
 	notice_area = %NoticeArea
