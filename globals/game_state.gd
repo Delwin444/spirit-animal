@@ -3,6 +3,7 @@ extends Node
 signal mask_added(mask: Mask)
 
 var collected_masks := [];
+var player : Player = null;
 
 func add_mask(mask: Mask) -> void:
 	for collected_mask in collected_masks:

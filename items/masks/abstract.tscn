@@ -3,18 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="1_gb7b8"]
 [ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="2_0rtbs"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gb7b8"]
-radius = 64.00001
-
 [node name="DefaultMask" type="Sprite2D" unique_id=1160054275]
-scale = Vector2(0.046875004, 0.046874985)
+scale = Vector2(0.09374999, 0.09374996)
 texture = ExtResource("1_gb7b8")
 script = ExtResource("2_0rtbs")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=872368880]
-unique_name_in_owner = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1362243196]
-shape = SubResource("CircleShape2D_gb7b8")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

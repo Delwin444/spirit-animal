@@ -52,6 +52,7 @@ var active_mask_sprite: Sprite2D;
 
 func _ready() -> void:
 	_transition_to_state(current_state)
+	GameState.player = self
 
 
 func _physics_process(delta: float) -> void:
