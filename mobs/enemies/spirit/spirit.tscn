@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://blvgld3vebsgj"]
 
 [ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="1_5hndp"]
-[ext_resource type="Script" path="res://mobs/enemies/spirit/spirit.gd" id="1_8wsbx"]
-[ext_resource type="Script" path="res://mobs/enemies/behaviors/follow.gd" id="2_puyys"]
+[ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_8wsbx"]
+[ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="2_puyys"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
 radius = 34.0
@@ -25,7 +25,6 @@ shape = SubResource("CapsuleShape2D_8wsbx")
 [node name="Follow" type="Node" parent="." unique_id=904195158]
 unique_name_in_owner = true
 script = ExtResource("2_puyys")
-metadata/_custom_type_script = "uid://dixdes266utvs"
 
 [node name="NoticeArea" type="Area2D" parent="." unique_id=1124821796]
 unique_name_in_owner = true
