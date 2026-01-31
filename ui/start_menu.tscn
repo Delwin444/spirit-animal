@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c5pyymbh725bn"]
+
+[ext_resource type="Script" uid="uid://dyjkn6rmwlr87" path="res://ui/start_menu.gd" id="1_iuit4"]
+[ext_resource type="Texture2D" uid="uid://bnm85qebnkaoe" path="res://levels/GameMood_NoCharacters.jpg" id="2_loyqk"]
+[ext_resource type="FontFile" uid="uid://dy2ue8fbru2g8" path="res://ui/alketa demo regular.otf" id="3_loyqk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_loyqk"]
+font = ExtResource("3_loyqk")
+font_size = 190
+shadow_size = 38
+shadow_color = Color(0, 0, 0, 0.57254905)
+shadow_offset = Vector2(16, 16)
+
+[node name="StartMenu" type="Control" unique_id=1841682998]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iuit4")
+
+[node name="Button" type="Button" parent="." unique_id=726625139]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -61.0
+offset_right = 216.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 46
+text = "START GAME"
+
+[node name="Button2" type="Button" parent="." unique_id=1916165555]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = 138.0
+offset_right = 139.0
+offset_bottom = 222.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "QUIT"
+
+[node name="Control" type="Control" parent="." unique_id=1337752124]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameMoodNoCharacters" type="Sprite2D" parent="Control" unique_id=395761129]
+texture = ExtResource("2_loyqk")
+
+[node name="Label" type="Label" parent="." unique_id=1428325773]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -288.0
+offset_right = 65.0
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Spirit Animal"
+label_settings = SubResource("LabelSettings_loyqk")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
