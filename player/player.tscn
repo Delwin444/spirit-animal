@@ -266,6 +266,7 @@ size = Vector2(10, 12)
 
 [node name="Player" type="CharacterBody2D" unique_id=1880371565]
 scale = Vector2(4, 4)
+collision_layer = 2
 script = ExtResource("1_oul6g")
 acceleration = 2800
 deceleration = 5600

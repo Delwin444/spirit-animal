@@ -36,6 +36,7 @@ var active_mask_sprite: Sprite2D;
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var mask_position_marker: Marker2D = %MaskPositionMarker
+@onready var projectile_spawn_point: Marker2D = %ProjectileSpawnPoint
 
 # Primary jump calculations
 @onready var max_speed := calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)
@@ -52,7 +53,6 @@ var active_mask_sprite: Sprite2D;
 # Combat stuff
 @onready var attacking = false
 
-@onready var animation = $AnimatedSprite2D/BasicAttack/BasicAttackAnimationPlayer
 @onready var top_attack_animation = $AnimatedSprite2D/BasicAttack/SwordTop/TopAttackAnimation
 @onready var bottom_attack_animation = $AnimatedSprite2D/BasicAttack/SwordBottom/BottomAttackAnimation
 @onready var left_attack_animation = $AnimatedSprite2D/BasicAttack/SwordLeft/LeftAttackAnimation
@@ -67,6 +67,12 @@ var dash_time_left := 0.0
 var dash_direction := Vector2.ZERO
 var dash_cooldown_timer := 0.0
 var is_invincible = false
+
+# Projectile
+@export var projectile_scene: PackedScene = preload("res://player/projectile.tscn")
+@export var projectile_cooldown := 0.3
+var projectile_cooldown_timer := 0.0
+var last_move_direction := Vector2.RIGHT  # Track for projectile direction
 
 func _ready() -> void:
 	_transition_to_state(current_state)
@@ -135,16 +141,56 @@ func process_dash(delta: float) -> void:
 	velocity.x = dash_direction.x * dash_speed
 	velocity.y = 0  # Cancel gravity
 
+func get_shoot_direction() -> Vector2:
+	# Get 8-directional input
+	var input_x = Input.get_axis("move_left", "move_right")
+	var input_y = Input.get_axis("move_up", "move_down")
+	
+	if input_x != 0 or input_y != 0:
+		var dir = Vector2(input_x, input_y).normalized()
+		last_move_direction = dir
+		return dir
+	
+	# If no input, use last direction or facing direction
+	if last_move_direction != Vector2.ZERO:
+		return last_move_direction
+	
+	# Fallback to facing direction
+	return Vector2(-1 if animated_sprite.flip_h else 1, 0)
+
+func shoot_projectile():
+	if projectile_cooldown_timer > 0 or projectile_scene == null:
+		return
+	
+	var projectile = projectile_scene.instantiate()
+	
+	# Use spawn point if it exists, otherwise use player position with offset
+	if projectile_spawn_point:
+		projectile.global_position = projectile_spawn_point.global_position
+	else:
+		projectile.global_position = global_position + Vector2(0, -40)  # Offset upward
+	
+	projectile.direction = get_shoot_direction()
+	
+	get_parent().add_child(projectile)
+	projectile_cooldown_timer = projectile_cooldown
+
 func _physics_process(delta: float) -> void:
 	direction_x = signf(Input.get_axis("move_left", "move_right"))
 	
-	# Update dash cooldown
+	# Update all cooldowns
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
+	if projectile_cooldown_timer > 0:
+		projectile_cooldown_timer -= delta
 	
 	# CHECK ATTACK INPUT FIRST - before any state processing
 	if Input.is_action_just_pressed("basic_attack"):
 		attack()
+	
+	# CHECK PROJECTILE INPUT
+	if Input.is_action_just_pressed("shoot"):
+		shoot_projectile()
 	
 	# Check for dash input
 	if Input.is_action_just_pressed("dash") and not dashing and dash_cooldown_timer <= 0:

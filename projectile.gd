@@ -1,0 +1,32 @@
+extends Area2D
+
+@export var speed := 1200.0
+@export var lifetime := 2.0  # Seconds before auto-destroying
+
+var direction := Vector2.RIGHT
+var time_alive := 0.0
+
+func _ready() -> void:
+	# Connect to detect hits
+	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
+
+func _physics_process(delta: float) -> void:
+	position += direction * speed * delta
+	
+	# Auto-destroy after lifetime
+	time_alive += delta
+	if time_alive >= lifetime:
+		queue_free()
+
+func _on_body_entered(body: Node2D) -> void:
+	# Hit something solid
+	if body.has_method("take_damage"):
+		body.take_damage(1)  # TODO: Replace with gamestate dmg
+	queue_free()
+
+func _on_area_entered(area: Area2D) -> void:
+	# Hit an enemy or damageable area
+	if area.has_method("take_damage"):
+		area.take_damage(1)
+	queue_free()
