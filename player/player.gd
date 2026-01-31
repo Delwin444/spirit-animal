@@ -266,6 +266,9 @@ func process_ground_state(delta: float) -> void:
 
 		animated_sprite.flip_h = direction_x < 0.0
 		animated_sprite.play("Run")
+
+		# Track ranged attack direction
+		last_move_direction = Vector2(direction_x, 0)
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 
@@ -298,6 +301,8 @@ func process_jump_state(delta: float) -> void:
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
 		animated_sprite.flip_h = direction_x < 0.0
 
+		last_move_direction = Vector2(direction_x, 0)
+
 
 func process_fall_state(delta: float) -> void:
 	if is_on_floor():
@@ -314,6 +319,9 @@ func process_fall_state(delta: float) -> void:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
 		animated_sprite.flip_h = direction_x < 0.0
+		
+		last_move_direction = Vector2(direction_x, 0)
+
 
 
 ## Performs a jump with specified force
