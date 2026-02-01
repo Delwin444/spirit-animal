@@ -25,6 +25,7 @@ limit_bottom = 1080
 follow_viewport_enabled = true
 
 [node name="ParallaxForeground" parent="." unique_id=969323796 instance=ExtResource("3_045es")]
+layer = 0
 
 [node name="TileMapLayer" parent="." unique_id=853132546 instance=ExtResource("4_61w3m")]
 
