@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bw16bv02xj6mt"]
+
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_1i781"]
+
+[node name="Kangaroo" type="Sprite2D" unique_id=1234086035]
+script = ExtResource("1_1i781")
+type = "kangaroo"
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

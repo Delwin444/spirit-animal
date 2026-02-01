@@ -8,7 +8,6 @@ enum State {
 	FALL
 }
 
-const MAX_JUMPS := 2
 
 @export var acceleration := 700
 @export var deceleration := 1400
@@ -32,6 +31,7 @@ var current_state: State = State.GROUND
 var jump_released := false
 var coyote_time_active := false
 var jump_count := 0
+var max_jumps := 1
 
 var active_mask_sprite: Sprite2D;
 
@@ -296,7 +296,7 @@ func process_ground_state(delta: float) -> void:
 
 
 func process_jump_state(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS:
+	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
 		jump(double_jump_speed)
 	elif Input.is_action_just_released("jump"):
 		if velocity.y < 0 and velocity.y < -jump_cut_speed and not jump_released:
@@ -327,7 +327,7 @@ func process_fall_state(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		if coyote_time_active:
 			jump(jump_speed)
-		elif jump_count < MAX_JUMPS:
+		elif jump_count < max_jumps:
 			jump(double_jump_speed)
 
 	if direction_x != 0.0:
@@ -398,8 +398,6 @@ func _transition_to_state(new_state: State) -> void:
 				get_tree().create_timer(0.1).timeout.connect(func(): coyote_time_active = false)
 
 
-
-
 func collect_mask(mask: Mask) -> void:
 	GameState.add_mask(mask)
 	
@@ -415,7 +413,19 @@ func collect_mask(mask: Mask) -> void:
 
 
 func player_mask_equipped(mask_type: String) -> void:
+	handle_cheetah(mask_type)
+	handle_kangaroo(mask_type)
+
+
+func handle_cheetah(mask_type: String) -> void:
 	if mask_type == GameState.MASK_TYPE_CHEETAH:
 		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent) * 1.5
 	if not mask_type == GameState.MASK_TYPE_CHEETAH:
 		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)
+
+
+func handle_kangaroo(mask_type: String) -> void:
+	if mask_type == GameState.MASK_TYPE_KANGAROO:
+		max_jumps = 2
+	if not mask_type == GameState.MASK_TYPE_KANGAROO:
+		max_jumps = 1
