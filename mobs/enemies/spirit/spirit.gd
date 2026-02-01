@@ -2,7 +2,6 @@ extends Enemy
 class_name Spirit
 
 @onready var visual: Node2D = $Node2D
-@onready var tile_map: TileMapLayer = $TileMapLayer
 
 func _ready() -> void:
 	notice_area = %NoticeArea
