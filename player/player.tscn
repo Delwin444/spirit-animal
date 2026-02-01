@@ -330,6 +330,8 @@ sprite_frames = ExtResource("2_rkbax")
 animation = &"Jump"
 
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
+collision_layer = 0
+collision_mask = 4
 
 [node name="SwordRight" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=460712776]
 position = Vector2(950.18195, -49.45456)
@@ -431,3 +433,5 @@ volume_db = -9.711
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="." unique_id=1321243287]
 libraries/ = SubResource("AnimationLibrary_2ieo8")
+
+[connection signal="body_entered" from="AnimatedSprite2D/BasicAttack" to="." method="_on_basic_attack_body_entered"]

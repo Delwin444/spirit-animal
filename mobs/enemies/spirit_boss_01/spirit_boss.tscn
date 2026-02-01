@@ -123,6 +123,7 @@ fall_gravity = 50000
 max_fall_speed = 50000
 behavior = NodePath("Follow")
 movement_speed = 10000
+max_health = 500
 score_points = 1000
 
 [node name="Node2D" type="Node2D" parent="." unique_id=807702952]

@@ -55,7 +55,7 @@ var active_mask: Mask;
 
 # Combat stuff
 @onready var attacking = false
-
+@export var melee_attack_dmg := 50
 @onready var top_attack_animation = $AnimatedSprite2D/BasicAttack/SwordTop/TopAttackAnimation
 @onready var bottom_attack_animation = $AnimatedSprite2D/BasicAttack/SwordBottom/BottomAttackAnimation
 @onready var left_attack_animation = $AnimatedSprite2D/BasicAttack/SwordLeft/LeftAttackAnimation
@@ -493,3 +493,8 @@ func handle_llama(mask_type: String) -> void:
 		can_shoot = true
 	if not mask_type == GameState.MASK_TYPE_LLAMA:
 		can_shoot = false
+
+
+func _on_basic_attack_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		body.get_damage(melee_attack_dmg)

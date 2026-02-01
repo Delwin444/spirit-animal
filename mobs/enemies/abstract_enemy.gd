@@ -7,7 +7,7 @@ extends CharacterBody2D
 var notice_area: Area2D
 var can_fly := false
 var contact_damage_timer : Timer
-var health = max_health : set = set_health
+@onready var health : float = max_health : set = set_health
 
 
 @export var fall_gravity := 6000
