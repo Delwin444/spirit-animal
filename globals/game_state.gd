@@ -4,6 +4,7 @@ extends Node
 signal mask_added(mask: Mask)
 signal player_died()
 signal mask_equipped(mask_type: String)
+signal score_updated(score: float)
 
 
 var collected_masks := [];
@@ -11,6 +12,8 @@ var player : Player = null;
 var max_player_health = 100
 var player_health : float = max_player_health : set = _set_player_health
 var equipped_mask_type : String : set = _set_equipped_mask_type
+var score := 0 : set = _set_score
+const MAX_SCORE = 9999
 const MASK_TYPE_CHEETAH = "cheetah"
 const MASK_TYPE_KANGAROO = "kangaroo"
 const MASK_TYPE_LLAMA = "llama"
@@ -52,4 +55,9 @@ func _set_equipped_mask_type(new_mask_type: String) -> void:
 	
 	equipped_mask_type = new_mask_type
 	mask_equipped.emit(new_mask_type)
-	
+
+
+func _set_score(new_score: float) -> void:
+	new_score = min(new_score, MAX_SCORE)
+	score = new_score
+	score_updated.emit(score)

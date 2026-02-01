@@ -21,5 +21,5 @@ layout_mode = 0
 offset_left = 20.0
 offset_right = 380.0
 offset_bottom = 72.0
-text = "SCORE: 9999"
+text = "SCORE: 0"
 label_settings = SubResource("LabelSettings_phtbq")

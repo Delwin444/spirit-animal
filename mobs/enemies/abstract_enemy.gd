@@ -18,6 +18,7 @@ var health = max_health : set = set_health
 @export var contact_damage_timeout := .5
 @export var movement_speed := 5000
 @export var max_health := 100
+@export var score_points := 50
 
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
@@ -82,6 +83,7 @@ func set_health(new_health: float) -> void:
 func die() -> void:
 	if animation_player and animation_player.has_animation("death"):
 		animation_player.play("death")
+		GameState.score += score_points
 		animation_player.animation_finished.connect(queue_free)
 	
 	if not animation_player or not animation_player.has_animation("death"):
