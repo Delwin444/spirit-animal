@@ -14,6 +14,7 @@ var max_player_health = 100
 var player_health : float = max_player_health : set = _set_player_health
 var equipped_mask_type : String : set = _set_equipped_mask_type
 var score := 0 : set = _set_score
+var is_inventory_open := false
 const MAX_SCORE = 9999
 const MASK_TYPE_CHEETAH = "cheetah"
 const MASK_TYPE_KANGAROO = "kangaroo"

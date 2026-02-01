@@ -105,7 +105,7 @@ func _ready() -> void:
 func attack():
 	var pitch_change = rng.randf_range(0.9, 1.1)
 
-	if attacking:
+	if attacking or GameState.is_inventory_open:
 		return
 	attack_hit_sound.pitch_scale = pitch_change
 	attack_hit_sound.play()

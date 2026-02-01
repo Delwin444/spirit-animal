@@ -18,8 +18,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("open_inventory") and inventory.visible == true:
 		inventory.hide()
+		GameState.is_inventory_open = false
 	elif Input.is_action_just_pressed("open_inventory") and inventory.visible == false:
 		inventory.show()
+		GameState.is_inventory_open = true
 
 
 
