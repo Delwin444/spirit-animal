@@ -16,6 +16,7 @@ const MASK_TYPE_KANGAROO = "kangaroo"
 const MASK_TYPE_LLAMA = "llama"
 
 
+
 func add_mask(mask: Mask) -> void:
 	for collected_mask in collected_masks:
 		if collected_mask.type == mask.type:

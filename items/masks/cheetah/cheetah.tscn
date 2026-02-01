@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_acrf2"]
 [ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="1_twy0c"]
+[ext_resource type="AudioStream" uid="uid://dssmn0n1sgtps" path="res://items/masks/cheetah/cheetah.mp3" id="3_ftku4"]
 
 [node name="Cheetah" type="Sprite2D" unique_id=935193788]
 texture = ExtResource("1_twy0c")
 script = ExtResource("1_acrf2")
 type = "cheetah"
+selection_sound = ExtResource("3_ftku4")
 metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

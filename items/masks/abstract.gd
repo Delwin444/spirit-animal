@@ -7,3 +7,5 @@ extends Sprite2D
 	GameState.MASK_TYPE_KANGAROO,
 	GameState.MASK_TYPE_LLAMA
 ) var type : String
+
+@export var selection_sound : AudioStreamMP3

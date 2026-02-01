@@ -41,11 +41,13 @@ func _on_body_exited(body: Node2D) -> void:
 func open() -> void:
 	if mask_scene:
 		mask = mask_scene.instantiate()
-		GameState.add_mask(mask)
 	chest_open_sound.play()
 	animation_sprite.play(str("opening_", type))
 	animation_sprite.animation_finished.connect(transfer_mask)
 	already_opened = true
+
+func add_mask_to_game_state() -> void:
+	GameState.add_mask(mask)
 
 
 func transfer_mask() -> void:
