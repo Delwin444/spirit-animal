@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dkxb1lx8owxr7" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="SpriteFrames" uid="uid://cl0xj6huwoewx" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="3_g1dw6"]
-[ext_resource type="Material" uid="uid://dcfsu8dmcl22g" path="res://globals/damage.tres" id="5_hg6s5"]
 [ext_resource type="Script" uid="uid://dv21oahjgfyxx" path="res://player/sprite_2d.gd" id="4_yw30f"]
+[ext_resource type="Material" uid="uid://r4qfxhlawj37" path="res://globals/damage.tres" id="5_hg6s5"]
 [ext_resource type="AudioStream" uid="uid://dgpvwq1lgdsq2" path="res://player/SFX_Slash_1.mp3" id="5_qjkh3"]
 [ext_resource type="AudioStream" uid="uid://p2k1nwl14r7p" path="res://player/DashSFXLOuder.mp3" id="6_g6k8r"]
 [ext_resource type="AudioStream" uid="uid://cipxthhfj2wfj" path="res://player/JumpSFXLouder.mp3" id="7_boad6"]
@@ -327,7 +327,7 @@ material = ExtResource("5_hg6s5")
 position = Vector2(0, -11)
 scale = Vector2(0.021484375, 0.021484377)
 sprite_frames = ExtResource("2_rkbax")
-animation = &"Idle"
+animation = &"Jump"
 
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
 
@@ -409,6 +409,10 @@ position = Vector2(-6.5, -12.5)
 [node name="Attack_Slash_Sound" type="AudioStreamPlayer2D" parent="." unique_id=1669336035]
 unique_name_in_owner = true
 stream = ExtResource("5_qjkh3")
+
+[node name="Shoot_Sound" type="AudioStreamPlayer2D" parent="." unique_id=948827734]
+unique_name_in_owner = true
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="sfx_playerDash" type="AudioStreamPlayer" parent="." unique_id=1880828789]
 unique_name_in_owner = true

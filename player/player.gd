@@ -77,9 +77,12 @@ var is_invincible = false
 # Projectile
 @export var projectile_scene: PackedScene = preload("res://player/projectile.tscn")
 @export var projectile_cooldown := 0.3
+@onready var shoot_sound_player = %Shoot_Sound
 var projectile_cooldown_timer := 0.0
 var last_move_direction := Vector2.RIGHT  # Track for projectile direction
 var can_shoot := false
+@onready var shoot_sound_1 = preload("res://items/masks/llama/sfx_spit.mp3")
+@onready var shoot_sound_2 = preload("res://items/masks/llama/sfx_moreSpit.mp3")
 
 @onready var player_walk_sound = %sfx_playerWalk
 var rng = RandomNumberGenerator.new()
@@ -197,6 +200,11 @@ func shoot_projectile():
 	projectile.direction = get_shoot_direction()
 	
 	get_parent().add_child(projectile)
+	var selected_shoot_sound = shoot_sound_1
+	if randi() % 2:
+		selected_shoot_sound = shoot_sound_2
+	shoot_sound_player.stream = selected_shoot_sound
+	shoot_sound_player.play()
 	projectile_cooldown_timer = projectile_cooldown
 
 func _physics_process(delta: float) -> void:
