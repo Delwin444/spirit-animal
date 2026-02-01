@@ -1,22 +1,37 @@
 [gd_scene format=3 uid="uid://dal4nmfq88phc"]
 
 [ext_resource type="Script" uid="uid://b2cl1f0t0j51u" path="res://projectile.gd" id="1_islhu"]
-[ext_resource type="Texture2D" uid="uid://vcwnftmgqlr4" path="res://player/player_assets/dust_particle.png" id="2_islhu"]
+[ext_resource type="Texture2D" uid="uid://c35k6vo2gukra" path="res://player/player_assets/attack_temp/Mask_SpriteSheet_2.png" id="2_islhu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjidt"]
 radius = 30.016663
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5b1o"]
+atlas = ExtResource("2_islhu")
+region = Rect2(1536, 1024, 512, 1024)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gjidt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5b1o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Projectile" type="Area2D" unique_id=1313549832]
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_islhu")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=832870575]
-position = Vector2(-3.8146973e-06, 1.1444092e-05)
-scale = Vector2(12.153781, 12.153781)
-texture = ExtResource("2_islhu")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=422736759]
 shape = SubResource("CircleShape2D_gjidt")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=2021330773]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1501042182]
+position = Vector2(-6.000002, -1)
+scale = Vector2(0.32714844, 0.32714844)
+sprite_frames = SubResource("SpriteFrames_gjidt")

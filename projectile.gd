@@ -11,9 +11,12 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
 	
-		# Normalize direction
+	# Normalize direction
 	if direction != Vector2.ZERO:
 		direction = direction.normalized()
+	
+	# Rotate to face direction
+	rotation = direction.angle()
 
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
