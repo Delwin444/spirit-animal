@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5pyymbh725bn"]
 
 [ext_resource type="Script" uid="uid://dyjkn6rmwlr87" path="res://ui/start_menu.gd" id="1_iuit4"]
+[ext_resource type="Script" uid="uid://ch32wvrhe4rh" path="res://ui/button.gd" id="2_lb6g3"]
 [ext_resource type="Texture2D" uid="uid://bnm85qebnkaoe" path="res://levels/GameMood_NoCharacters.jpg" id="2_loyqk"]
 [ext_resource type="FontFile" uid="uid://dy2ue8fbru2g8" path="res://ui/alketa demo regular.otf" id="3_loyqk"]
 
@@ -36,6 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 46
 text = "START GAME"
+script = ExtResource("2_lb6g3")
 
 [node name="Button2" type="Button" parent="." unique_id=1916165555]
 z_index = 1
