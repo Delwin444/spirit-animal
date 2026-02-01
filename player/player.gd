@@ -27,6 +27,7 @@ const MAX_JUMPS := 2
 var direction_x := 0.0
 var current_state: State = State.GROUND
 
+
 # State-specific variables
 var jump_released := false
 var coyote_time_active := false
@@ -44,6 +45,7 @@ var active_mask_sprite: Sprite2D;
 @onready var jump_gravity := calculate_jump_gravity(jump_height, jump_time_to_peak)
 @onready var fall_gravity := calculate_fall_gravity(jump_height, jump_time_to_descent)
 @onready var jump_cut_speed := fall_gravity / jump_cut_value
+@onready var player_jump_sound = %sfx_playerJump
 
 # Double jump calculations
 @onready var double_jump_speed := calculate_jump_speed(double_jump_height, double_jump_time_to_peak)
@@ -57,8 +59,11 @@ var active_mask_sprite: Sprite2D;
 @onready var bottom_attack_animation = $AnimatedSprite2D/BasicAttack/SwordBottom/BottomAttackAnimation
 @onready var left_attack_animation = $AnimatedSprite2D/BasicAttack/SwordLeft/LeftAttackAnimation
 @onready var right_attack_animation = $AnimatedSprite2D/BasicAttack/SwordRight/RightAttackAnimation
+@onready var attack_hit_sound = %Attack_Slash_Sound
+
 
 # Dashing
+@onready var dash_sound = %sfx_playerDash
 @onready var dashing = false
 @export var dash_speed := 250.0
 @export var dash_duration := 0.2
@@ -74,6 +79,11 @@ var is_invincible = false
 var projectile_cooldown_timer := 0.0
 var last_move_direction := Vector2.RIGHT  # Track for projectile direction
 
+@onready var player_walk_sound = %sfx_playerWalk
+var rng = RandomNumberGenerator.new()
+
+	
+
 func _ready() -> void:
 	_transition_to_state(current_state)
 	GameState.player = self
@@ -88,9 +98,12 @@ func _process(delta: float) -> void:
 	pass
 
 func attack():
+	var pitch_change = rng.randf_range(0.9, 1.1)
+	
 	if attacking:
 		return
-	
+	attack_hit_sound.pitch_scale = pitch_change
+	attack_hit_sound.play()
 	attacking = true
 	
 	# Check directional input and play corresponding attack
@@ -113,6 +126,8 @@ func _on_attack_finished(anim_name: String) -> void:
 	attacking = false
 
 func dash():
+	var pitch_change = rng.randf_range(0.7, 1.3)
+	
 	if dashing or dash_cooldown_timer > 0:
 		return
 	
@@ -120,6 +135,8 @@ func dash():
 	is_invincible = true
 	dash_time_left = dash_duration
 	dash_cooldown_timer = dash_cooldown
+	dash_sound.pitch_scale = pitch_change
+	dash_sound.play()
 	
 	# Determine dash direction
 	if direction_x != 0:
@@ -255,7 +272,7 @@ func calculate_fall_gravity(height: float, time_to_descent: float) -> float:
 	return (2.0 * height) / pow(time_to_descent, 2.0)
 
 
-func process_ground_state(delta: float) -> void:
+func process_ground_state(delta: float) -> void:	
 	if Input.is_action_just_pressed("jump"):
 		jump(jump_speed)
 
@@ -263,6 +280,8 @@ func process_ground_state(delta: float) -> void:
 	if is_moving:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
+		## Need a Way to perma Play this, while is_moving true
+		player_walk_sound.play()
 
 		animated_sprite.flip_h = direction_x < 0.0
 		animated_sprite.play("Run")
@@ -327,10 +346,14 @@ func process_fall_state(delta: float) -> void:
 ## Performs a jump with specified force
 ## Handles both regular jumps and double jumps
 func jump(jump_force: float) -> void:
+	
+	var pitch_change = rng.randf_range(0.9, 1.1) 
 
 	if current_state == State.GROUND:
 		# First jump from ground
 		jump_count = 1
+		player_jump_sound.pitch_scale = pitch_change
+		player_jump_sound.play()
 		_transition_to_state(State.JUMP)
 	else:
 		# This could be a coyote jump or a double jump
@@ -341,6 +364,8 @@ func jump(jump_force: float) -> void:
 		else:
 			# Double jump
 			jump_count = 2
+			player_jump_sound.pitch_scale = pitch_change
+			player_jump_sound.play()
 			animated_sprite.play("Jump")
 			play_tween_jump()
 
