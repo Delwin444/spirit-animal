@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dkxb1lx8owxr7" path="res://player/player.gd" id="1_oul6g"]
 [ext_resource type="SpriteFrames" uid="uid://cl0xj6huwoewx" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="3_g1dw6"]
-[ext_resource type="Script" uid="uid://dv21oahjgfyxx" path="res://player/sprite_2d.gd" id="4_yw30f"]
+[ext_resource type="Script" path="res://player/sprite_2d.gd" id="4_yw30f"]
 [ext_resource type="AudioStream" uid="uid://dgpvwq1lgdsq2" path="res://player/SFX_Slash_1.mp3" id="5_qjkh3"]
 [ext_resource type="AudioStream" uid="uid://p2k1nwl14r7p" path="res://player/DashSFXLOuder.mp3" id="6_g6k8r"]
 [ext_resource type="AudioStream" uid="uid://cipxthhfj2wfj" path="res://player/JumpSFXLouder.mp3" id="7_boad6"]
@@ -266,20 +266,21 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yw30f"]
-radius = 9.0
-height = 23.5
+radius = 5.9999995
+height = 16.642857
 
 [node name="Player" type="CharacterBody2D" unique_id=1880371565]
-scale = Vector2(4, 4)
+scale = Vector2(7, 7)
 collision_layer = 2
 script = ExtResource("1_oul6g")
-acceleration = 2800
-deceleration = 5600
-max_fall_speed = 1000
+acceleration = 5000
+deceleration = 7000
+max_fall_speed = 800
 jump_horizontal_distance = 320
-jump_height = 200
-double_jump_height = 120
-dash_speed = 1000.0
+jump_height = 250
+double_jump_height = 300
+double_jump_time_to_peak = 0.5
+dash_speed = 2000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234592446]
 unique_name_in_owner = true
