@@ -114,11 +114,19 @@ func attack():
 	elif Input.is_action_pressed("move_right"):
 		right_attack_animation.play("right_attack")
 	else:
-		# Default attack based on last facing direction
-		if animated_sprite.flip_h:
-			left_attack_animation.play("left_attack")
+		# Default attack based on last move direction
+		if abs(last_move_direction.y) > abs(last_move_direction.x):
+			# Vertical direction is dominant
+			if last_move_direction.y < 0:
+				top_attack_animation.play("top_attack")
+			else:
+				bottom_attack_animation.play("bottom_attack")
 		else:
-			right_attack_animation.play("right_attack")
+			# Horizontal direction is dominant (or equal)
+			if last_move_direction.x < 0:
+				left_attack_animation.play("left_attack")
+			else:
+				right_attack_animation.play("right_attack")
 
 func _on_attack_finished(_anim_name: String) -> void:
 	attacking = false
