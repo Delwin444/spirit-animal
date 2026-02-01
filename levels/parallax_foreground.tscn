@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://2avt27ksb8o4"]
+
+[ext_resource type="Texture2D" uid="uid://2pl3t7iqqx65" path="res://levels/World_Foreground_depth.png" id="1_xtlm8"]
+
+[node name="ParallaxForeground" type="ParallaxBackground" unique_id=2123385024]
+layer = 100
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=72736993]
+scroll_scale = Vector2(2.5, 2.5)
+repeat_size = Vector2(2395, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1498773269]
+texture = ExtResource("1_xtlm8")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2400, 1080)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://csmw6ycqm5qk"]
 
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
+[ext_resource type="PackedScene" uid="uid://2avt27ksb8o4" path="res://levels/parallax_foreground.tscn" id="3_045es"]
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="4_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_pdpul"]
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
@@ -19,6 +20,8 @@ limit_bottom = 1080
 
 [node name="ParallaxBackground" parent="." unique_id=2123385024 instance=ExtResource("4_ua5ty")]
 follow_viewport_enabled = true
+
+[node name="ParallaxForeground" parent="." unique_id=969323796 instance=ExtResource("3_045es")]
 
 [node name="TileMapLayer" parent="." unique_id=853132546 instance=ExtResource("4_61w3m")]
 
