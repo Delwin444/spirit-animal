@@ -93,9 +93,6 @@ func _ready() -> void:
 	left_attack_animation.animation_finished.connect(_on_attack_finished)
 	right_attack_animation.animation_finished.connect(_on_attack_finished)
 
-func _process(delta: float) -> void:
-	pass
-
 func attack():
 	var pitch_change = rng.randf_range(0.9, 1.1)
 
@@ -121,7 +118,7 @@ func attack():
 		else:
 			right_attack_animation.play("right_attack")
 
-func _on_attack_finished(anim_name: String) -> void:
+func _on_attack_finished(_anim_name: String) -> void:
 	attacking = false
 
 func dash():

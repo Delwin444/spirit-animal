@@ -361,6 +361,10 @@ shape = SubResource("CapsuleShape2D_yw30f")
 unique_name_in_owner = true
 position = Vector2(0, -16)
 
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="." unique_id=957558765]
+unique_name_in_owner = true
+position = Vector2(-6.5, -12.5)
+
 [node name="Attack_Slash_Sound" type="AudioStreamPlayer2D" parent="." unique_id=1669336035]
 unique_name_in_owner = true
 stream = ExtResource("5_qjkh3")
