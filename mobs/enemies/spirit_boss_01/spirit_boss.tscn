@@ -6,19 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="4_aahmy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
-radius = 117.0
-height = 434.0
+radius = 108.0
+height = 260.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
 radius = 1084.8691
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
-radius = 170.0
-height = 440.0
+radius = 98.0
+height = 242.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ildjm"]
-radius = 153.0
-height = 520.54065
+radius = 67.66937
+height = 242.4736
 
 [sub_resource type="Animation" id="Animation_ums5h"]
 length = 0.001
@@ -171,11 +171,12 @@ script = ExtResource("1_ui7ij")
 behavior = NodePath("Follow")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
-position = Vector2(-1, 1.9999924)
-scale = Vector2(1.828125, 2.78125)
+position = Vector2(-3.8146973e-06, 3.8146973e-06)
+scale = Vector2(1.2734375, 1.9373664)
 texture = ExtResource("2_ov1qc")
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
+position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_8wsbx")
 
 [node name="Follow" type="Node" parent="." unique_id=904195158]
@@ -186,7 +187,7 @@ script = ExtResource("3_j6aa0")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
-position = Vector2(-7, -2)
+position = Vector2(-12, -3)
 shape = SubResource("CircleShape2D_puyys")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
@@ -195,22 +196,23 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
+position = Vector2(-2, -2)
 shape = SubResource("CapsuleShape2D_puyys")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=691430006]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1193171376]
-position = Vector2(-108.864655, 60.89235)
+position = Vector2(-156.05112, 100.62184)
 rotation = 0.773835
 shape = SubResource("CapsuleShape2D_ildjm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=808372257]
-position = Vector2(-75.83098, 29.161957)
+position = Vector2(-144.06943, 95.83552)
 rotation = 0.015920907
-scale = Vector2(1.0580696, 1.0555507)
+scale = Vector2(0.5409266, 0.5396388)
 texture = ExtResource("4_aahmy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D" unique_id=1972097135]
+[node name="SweepAttackAnimator" type="AnimationPlayer" parent="Area2D" unique_id=1972097135]
 libraries/ = SubResource("AnimationLibrary_f4itl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=371047820]
