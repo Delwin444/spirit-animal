@@ -286,7 +286,7 @@ unique_name_in_owner = true
 position = Vector2(0, -11)
 scale = Vector2(0.021484375, 0.021484377)
 sprite_frames = ExtResource("2_rkbax")
-animation = &"Idle"
+animation = &"Jump"
 
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
 
