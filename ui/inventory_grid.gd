@@ -6,7 +6,8 @@ func _ready():
 func add_mask_to_inventory(mask: Mask):
 	if mask == null:
 		return
-	var sprite2d = TextureRect.new();
-	sprite2d.texture = mask.texture;
+	var mask_button = MaskButton.new();
+	mask_button.texture_normal = mask.texture;
+	mask_button.mask_type = mask.type
 	
-	add_child(sprite2d)
+	add_child(mask_button)

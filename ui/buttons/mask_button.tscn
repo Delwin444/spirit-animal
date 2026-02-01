@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://oouo0f1jr8tb"]
+
+[ext_resource type="Script" uid="uid://d31fx6nrcpn1y" path="res://ui/buttons/mask_button.gd" id="1_w1clt"]
+
+[node name="MaskButton" type="TextureButton" unique_id=217344101]
+script = ExtResource("1_w1clt")

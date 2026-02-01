@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ej22xgooie61"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://ghpc0584mns6" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://csmw6ycqm5qk" path="res://levels/level1.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" path="res://ui/inventory.tscn" id="2_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://2ipytf1qk2qe" path="res://ui/inventory.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dmlqxsdei0k6i" path="res://ui/hud.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="5_lquwl"]
 
@@ -11,20 +11,27 @@ script = ExtResource("1_h2yge")
 
 [node name="Level1" parent="." unique_id=1538598293 instance=ExtResource("1_ig7tw")]
 
-[node name="Inventory" parent="." unique_id=590567742 instance=ExtResource("2_1bvp3")]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 160.0
-offset_bottom = 80.0
-grow_horizontal = 1
-grow_vertical = 1
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539599108]
 
 [node name="HUD" parent="CanvasLayer" unique_id=2033886779 instance=ExtResource("4_1bvp3")]
+
+[node name="InventoryWrapper" type="Control" parent="CanvasLayer" unique_id=465222924]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Inventory" parent="CanvasLayer/InventoryWrapper" unique_id=590567742 instance=ExtResource("2_1bvp3")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Spirit" parent="." unique_id=1291073216 instance=ExtResource("5_lquwl")]
 position = Vector2(738, 814)

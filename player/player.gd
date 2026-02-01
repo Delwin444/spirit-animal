@@ -8,7 +8,6 @@ enum State {
 	FALL
 }
 
-const MAX_JUMPS := 2
 
 @export var acceleration := 700
 @export var deceleration := 1400
@@ -27,10 +26,12 @@ const MAX_JUMPS := 2
 var direction_x := 0.0
 var current_state: State = State.GROUND
 
+
 # State-specific variables
 var jump_released := false
 var coyote_time_active := false
 var jump_count := 0
+var max_jumps := 1
 
 var active_mask_sprite: Sprite2D;
 
@@ -44,6 +45,7 @@ var active_mask_sprite: Sprite2D;
 @onready var jump_gravity := calculate_jump_gravity(jump_height, jump_time_to_peak)
 @onready var fall_gravity := calculate_fall_gravity(jump_height, jump_time_to_descent)
 @onready var jump_cut_speed := fall_gravity / jump_cut_value
+@onready var player_jump_sound = %sfx_playerJump
 
 # Double jump calculations
 @onready var double_jump_speed := calculate_jump_speed(double_jump_height, double_jump_time_to_peak)
@@ -57,8 +59,11 @@ var active_mask_sprite: Sprite2D;
 @onready var bottom_attack_animation = $AnimatedSprite2D/BasicAttack/SwordBottom/BottomAttackAnimation
 @onready var left_attack_animation = $AnimatedSprite2D/BasicAttack/SwordLeft/LeftAttackAnimation
 @onready var right_attack_animation = $AnimatedSprite2D/BasicAttack/SwordRight/RightAttackAnimation
+@onready var attack_hit_sound = %Attack_Slash_Sound
+
 
 # Dashing
+@onready var dash_sound = %sfx_playerDash
 @onready var dashing = false
 @export var dash_speed := 250.0
 @export var dash_duration := 0.2
@@ -73,6 +78,11 @@ var is_invincible = false
 @export var projectile_cooldown := 0.3
 var projectile_cooldown_timer := 0.0
 var last_move_direction := Vector2.RIGHT  # Track for projectile direction
+var can_shoot := false
+
+@onready var player_walk_sound = %sfx_playerWalk
+var rng = RandomNumberGenerator.new()
+
 
 func _ready() -> void:
 	_transition_to_state(current_state)
@@ -83,14 +93,15 @@ func _ready() -> void:
 	bottom_attack_animation.animation_finished.connect(_on_attack_finished)
 	left_attack_animation.animation_finished.connect(_on_attack_finished)
 	right_attack_animation.animation_finished.connect(_on_attack_finished)
-
-func _process(delta: float) -> void:
-	pass
+	GameState.mask_equipped.connect(player_mask_equipped)
 
 func attack():
+	var pitch_change = rng.randf_range(0.9, 1.1)
+
 	if attacking:
 		return
-	
+	attack_hit_sound.pitch_scale = pitch_change
+	attack_hit_sound.play()
 	attacking = true
 	
 	# Check directional input and play corresponding attack
@@ -109,10 +120,12 @@ func attack():
 		else:
 			right_attack_animation.play("right_attack")
 
-func _on_attack_finished(anim_name: String) -> void:
+func _on_attack_finished(_anim_name: String) -> void:
 	attacking = false
 
 func dash():
+	var pitch_change = rng.randf_range(0.7, 1.3)
+
 	if dashing or dash_cooldown_timer > 0:
 		return
 	
@@ -120,7 +133,9 @@ func dash():
 	is_invincible = true
 	dash_time_left = dash_duration
 	dash_cooldown_timer = dash_cooldown
-	
+	dash_sound.pitch_scale = pitch_change
+	dash_sound.play()
+
 	# Determine dash direction
 	if direction_x != 0:
 		dash_direction = Vector2(direction_x, 0)
@@ -189,7 +204,7 @@ func _physics_process(delta: float) -> void:
 		attack()
 	
 	# CHECK PROJECTILE INPUT
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot_projectile()
 	
 	# Check for dash input
@@ -263,8 +278,10 @@ func process_ground_state(delta: float) -> void:
 	if is_moving:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
+		## Need a Way to perma Play this, while is_moving true
+		player_walk_sound.play()
 
-		animated_sprite.flip_h = direction_x < 0.0
+		flip_sprite(direction_x > 0.0)
 		animated_sprite.play("Run")
 
 		# Track ranged attack direction
@@ -278,9 +295,17 @@ func process_ground_state(delta: float) -> void:
 		_transition_to_state(State.FALL)
 
 
+func flip_sprite(is_flip_h: bool) -> void:
+	animated_sprite.flip_h = is_flip_h
+	if is_flip_h:
+		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x)
+	if not is_flip_h:
+		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x) * -1
+
+
 
 func process_jump_state(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS:
+	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
 		jump(double_jump_speed)
 	elif Input.is_action_just_released("jump"):
 		if velocity.y < 0 and velocity.y < -jump_cut_speed and not jump_released:
@@ -299,7 +324,6 @@ func process_jump_state(delta: float) -> void:
 	if direction_x != 0:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
-		animated_sprite.flip_h = direction_x < 0.0
 
 		last_move_direction = Vector2(direction_x, 0)
 
@@ -312,13 +336,13 @@ func process_fall_state(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		if coyote_time_active:
 			jump(jump_speed)
-		elif jump_count < MAX_JUMPS:
+		elif jump_count < max_jumps:
 			jump(double_jump_speed)
 
 	if direction_x != 0.0:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
-		animated_sprite.flip_h = direction_x < 0.0
+		flip_sprite(direction_x > 0.0)
 		
 		last_move_direction = Vector2(direction_x, 0)
 
@@ -328,9 +352,13 @@ func process_fall_state(delta: float) -> void:
 ## Handles both regular jumps and double jumps
 func jump(jump_force: float) -> void:
 
+	var pitch_change = rng.randf_range(0.9, 1.1)
+
 	if current_state == State.GROUND:
 		# First jump from ground
 		jump_count = 1
+		player_jump_sound.pitch_scale = pitch_change
+		player_jump_sound.play()
 		_transition_to_state(State.JUMP)
 	else:
 		# This could be a coyote jump or a double jump
@@ -341,8 +369,8 @@ func jump(jump_force: float) -> void:
 		else:
 			# Double jump
 			jump_count = 2
-			animated_sprite.play("Jump")
-			play_tween_jump()
+			player_jump_sound.pitch_scale = pitch_change
+			player_jump_sound.play()
 
 	velocity.y = jump_force
 
@@ -366,34 +394,17 @@ func _transition_to_state(new_state: State) -> void:
 			floor_snap_length = 8.0
 
 			if previous_state == State.FALL:
-				play_tween_touch_ground()
 				jump_count = 0
 
 		State.JUMP:
 			floor_snap_length = 0.0
-			animated_sprite.play("Jump")
 
 		State.FALL:
 			floor_snap_length = 0.0
-			animated_sprite.play("Fall")
 
 			if previous_state == State.GROUND:
 				coyote_time_active = true
 				get_tree().create_timer(0.1).timeout.connect(func(): coyote_time_active = false)
-
-
-func play_tween_touch_ground() -> void:
-	var tween := create_tween()
-	tween.tween_property(animated_sprite, "scale", Vector2(1.1, 0.9), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2(0.9, 1.1), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
-
-
-func play_tween_jump() -> void:
-	var tween := create_tween()
-	tween.tween_property(animated_sprite, "scale", Vector2(1.2, 0.8), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2(0.8, 1.2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
 
 
 func collect_mask(mask: Mask) -> void:
@@ -408,4 +419,30 @@ func collect_mask(mask: Mask) -> void:
 	
 	if !active_mask_sprite.get_parent():
 		self.add_child(active_mask_sprite);
-	
+
+
+func player_mask_equipped(mask_type: String) -> void:
+	handle_cheetah(mask_type)
+	handle_kangaroo(mask_type)
+	handle_llama(mask_type)
+
+
+func handle_cheetah(mask_type: String) -> void:
+	if mask_type == GameState.MASK_TYPE_CHEETAH:
+		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent) * 1.5
+	if not mask_type == GameState.MASK_TYPE_CHEETAH:
+		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)
+
+
+func handle_kangaroo(mask_type: String) -> void:
+	if mask_type == GameState.MASK_TYPE_KANGAROO:
+		max_jumps = 2
+	if not mask_type == GameState.MASK_TYPE_KANGAROO:
+		max_jumps = 1
+
+
+func handle_llama(mask_type: String) -> void:
+	if mask_type == GameState.MASK_TYPE_LLAMA:
+		can_shoot = true
+	if not mask_type == GameState.MASK_TYPE_LLAMA:
+		can_shoot = false

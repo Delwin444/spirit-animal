@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://cfyr2rpa0h7tp"]
 
 [ext_resource type="Script" uid="uid://dkxb1lx8owxr7" path="res://player/player.gd" id="1_oul6g"]
-[ext_resource type="SpriteFrames" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
+[ext_resource type="SpriteFrames" uid="uid://cl0xj6huwoewx" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="3_g1dw6"]
 [ext_resource type="Script" uid="uid://dv21oahjgfyxx" path="res://player/sprite_2d.gd" id="4_yw30f"]
+[ext_resource type="AudioStream" uid="uid://dgpvwq1lgdsq2" path="res://player/SFX_Slash_1.mp3" id="5_qjkh3"]
+[ext_resource type="AudioStream" uid="uid://p2k1nwl14r7p" path="res://player/DashSFXLOuder.mp3" id="6_g6k8r"]
+[ext_resource type="AudioStream" uid="uid://cipxthhfj2wfj" path="res://player/JumpSFXLouder.mp3" id="7_boad6"]
+[ext_resource type="AudioStream" uid="uid://4bfd8chehlxv" path="res://player/SFX_WalkOnGrass_FixedVersion.mp3" id="8_rgyib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
 size = Vector2(32, 13.125)
@@ -261,8 +265,9 @@ _data = {
 &"left_attack": SubResource("Animation_32hag")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g1dw6"]
-size = Vector2(10, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yw30f"]
+radius = 9.0
+height = 23.5
 
 [node name="Player" type="CharacterBody2D" unique_id=1880371565]
 scale = Vector2(4, 4)
@@ -279,6 +284,7 @@ dash_speed = 1000.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234592446]
 unique_name_in_owner = true
 position = Vector2(0, -11)
+scale = Vector2(0.021484375, 0.021484377)
 sprite_frames = ExtResource("2_rkbax")
 animation = &"Idle"
 
@@ -348,9 +354,32 @@ texture = ExtResource("3_g1dw6")
 libraries/ = SubResource("AnimationLibrary_tqiix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198949386]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_g1dw6")
+position = Vector2(0, -11.75)
+shape = SubResource("CapsuleShape2D_yw30f")
 
 [node name="MaskPositionMarker" type="Marker2D" parent="." unique_id=2033219103]
 unique_name_in_owner = true
-position = Vector2(1, -10)
+position = Vector2(0, -16)
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="." unique_id=957558765]
+unique_name_in_owner = true
+position = Vector2(-6.5, -12.5)
+
+[node name="Attack_Slash_Sound" type="AudioStreamPlayer2D" parent="." unique_id=1669336035]
+unique_name_in_owner = true
+stream = ExtResource("5_qjkh3")
+
+[node name="sfx_playerDash" type="AudioStreamPlayer" parent="." unique_id=1880828789]
+unique_name_in_owner = true
+stream = ExtResource("6_g6k8r")
+volume_db = -27.164
+
+[node name="sfx_playerJump" type="AudioStreamPlayer" parent="." unique_id=890545956]
+unique_name_in_owner = true
+stream = ExtResource("7_boad6")
+volume_db = -29.178
+
+[node name="sfx_playerWalk" type="AudioStreamPlayer" parent="." unique_id=1090405490]
+unique_name_in_owner = true
+stream = ExtResource("8_rgyib")
+volume_db = -9.711
