@@ -1,19 +1,27 @@
 [gd_scene format=3 uid="uid://blvgld3vebsgj"]
 
-[ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="1_5hndp"]
 [ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_8wsbx"]
+[ext_resource type="Texture2D" uid="uid://c6weecbnkuh0m" path="res://mobs/enemies/enemy_assets/Mask_SpriteSheet.png" id="2_j0kus"]
 [ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="2_puyys"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2osee"]
+texture = ExtResource("2_j0kus")
+texture_region_size = Vector2i(1024, 1024)
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_f1wdp"]
+sources/0 = SubResource("TileSetAtlasSource_2osee")
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
-radius = 34.0
-height = 128.0
+radius = 50.0
+height = 216.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
-radius = 129.0155
+radius = 250.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
-radius = 46.0
-height = 138.0
+radius = 61.0
+height = 208.0
 
 [sub_resource type="Animation" id="Animation_yfydh"]
 length = 0.001
@@ -103,11 +111,17 @@ _data = {
 script = ExtResource("1_8wsbx")
 behavior = NodePath("Follow")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
-scale = Vector2(0.546875, 1)
-texture = ExtResource("1_5hndp")
+[node name="Node2D" type="Node2D" parent="." unique_id=936435608]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D" unique_id=1693152622]
+scale = Vector2(0.2, 0.2)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0)
+tile_set = SubResource("TileSet_f1wdp")
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
+position = Vector2(3, -6)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_8wsbx")
 
 [node name="Follow" type="Node" parent="." unique_id=904195158]
@@ -120,6 +134,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
+position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_puyys")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
@@ -128,6 +143,8 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
+position = Vector2(5, -7)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_puyys")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=598906672]
