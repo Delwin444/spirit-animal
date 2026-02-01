@@ -4,6 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cl0xj6huwoewx" path="res://player/player_sprite_frames.tres" id="2_rkbax"]
 [ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="3_g1dw6"]
 [ext_resource type="Script" path="res://player/sprite_2d.gd" id="4_yw30f"]
+[ext_resource type="Material" uid="uid://dcfsu8dmcl22g" path="res://globals/damage.tres" id="5_hg6s5"]
 [ext_resource type="AudioStream" uid="uid://dgpvwq1lgdsq2" path="res://player/SFX_Slash_1.mp3" id="5_qjkh3"]
 [ext_resource type="AudioStream" uid="uid://p2k1nwl14r7p" path="res://player/DashSFXLOuder.mp3" id="6_g6k8r"]
 [ext_resource type="AudioStream" uid="uid://cipxthhfj2wfj" path="res://player/JumpSFXLouder.mp3" id="7_boad6"]
@@ -269,6 +270,44 @@ _data = {
 radius = 5.9999995
 height = 16.642857
 
+[sub_resource type="Animation" id="Animation_hg6s5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8t03j"]
+resource_name = "damage"
+length = 0.175
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.175),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ieo8"]
+_data = {
+&"RESET": SubResource("Animation_hg6s5"),
+&"damage": SubResource("Animation_8t03j")
+}
+
 [node name="Player" type="CharacterBody2D" unique_id=1880371565]
 scale = Vector2(7, 7)
 collision_layer = 2
@@ -284,6 +323,7 @@ dash_speed = 2000.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1234592446]
 unique_name_in_owner = true
+material = ExtResource("5_hg6s5")
 position = Vector2(0, -11)
 scale = Vector2(0.021484375, 0.021484377)
 sprite_frames = ExtResource("2_rkbax")
@@ -384,3 +424,6 @@ volume_db = -29.178
 unique_name_in_owner = true
 stream = ExtResource("8_rgyib")
 volume_db = -9.711
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="." unique_id=1321243287]
+libraries/ = SubResource("AnimationLibrary_2ieo8")
