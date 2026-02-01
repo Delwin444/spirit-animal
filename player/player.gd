@@ -140,6 +140,7 @@ func dash():
 	dash_direction = get_shoot_direction()
 
 func process_dash(delta: float) -> void:
+	animated_sprite.play("Dash")
 	dash_time_left -= delta
 	
 	if dash_time_left <= 0:
@@ -356,6 +357,7 @@ func jump(jump_force: float) -> void:
 		player_jump_sound.pitch_scale = pitch_change
 		player_jump_sound.play()
 		_transition_to_state(State.JUMP)
+		animated_sprite.play("Jump")
 	else:
 		# This could be a coyote jump or a double jump
 		if coyote_time_active:
@@ -367,6 +369,7 @@ func jump(jump_force: float) -> void:
 			jump_count = 2
 			player_jump_sound.pitch_scale = pitch_change
 			player_jump_sound.play()
+			animated_sprite.play("Jump")
 
 	velocity.y = jump_force
 
@@ -383,6 +386,7 @@ func _transition_to_state(new_state: State) -> void:
 			jump_released = false
 		State.FALL:
 			coyote_time_active = false
+
 
 	# Enter new state
 	match current_state:
