@@ -2,6 +2,7 @@ extends Node
 
 
 signal mask_added(mask: Mask)
+signal player_health_changed(player_health: float)
 signal player_died()
 signal mask_equipped(mask_type: String)
 signal score_updated(score: float)
@@ -41,6 +42,7 @@ func get_collected_mask_by_type(mask_type: String):
 
 func _set_player_health(new_player_health) -> void:
 	player_health = max(new_player_health, 0)
+	player_health_changed.emit(player_health)
 	if player_health == 0:
 		player_died.emit()
 

@@ -106,6 +106,8 @@ _data = {
 }
 
 [node name="SpiritBoss" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
+collision_layer = 7
+collision_mask = 3
 script = ExtResource("1_ui7ij")
 behavior = NodePath("Follow")
 
