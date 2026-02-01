@@ -10,6 +10,10 @@ func _ready() -> void:
 	# Connect to detect hits
 	body_entered.connect(_on_body_entered)
 	area_entered.connect(_on_area_entered)
+	
+		# Normalize direction
+	if direction != Vector2.ZERO:
+		direction = direction.normalized()
 
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
