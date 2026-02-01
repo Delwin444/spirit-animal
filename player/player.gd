@@ -88,6 +88,8 @@ func _ready() -> void:
 	_transition_to_state(current_state)
 	GameState.player = self
 	
+	animated_sprite.flip_h = true
+	
 	# Connect all attack animations to the finished handler
 	top_attack_animation.animation_finished.connect(_on_attack_finished)
 	bottom_attack_animation.animation_finished.connect(_on_attack_finished)
