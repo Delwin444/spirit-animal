@@ -92,6 +92,7 @@ func _ready() -> void:
 	bottom_attack_animation.animation_finished.connect(_on_attack_finished)
 	left_attack_animation.animation_finished.connect(_on_attack_finished)
 	right_attack_animation.animation_finished.connect(_on_attack_finished)
+	GameState.mask_equipped.connect(player_mask_equipped)
 
 func attack():
 	var pitch_change = rng.randf_range(0.9, 1.1)
@@ -411,4 +412,10 @@ func collect_mask(mask: Mask) -> void:
 	
 	if !active_mask_sprite.get_parent():
 		self.add_child(active_mask_sprite);
-	
+
+
+func player_mask_equipped(mask_type: String) -> void:
+	if mask_type == "cheetah":
+		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent) * 1.5
+	if not mask_type == "cheetah":
+		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)

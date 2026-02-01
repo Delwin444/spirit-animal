@@ -4,6 +4,7 @@ extends Area2D
 
 var can_be_opened = false
 var already_opened = false
+var mask : Mask
 const WHITE_KEY = "white"
 const OLD_KEY = "old"
 const NORMAL_KEY = "normal"
@@ -39,7 +40,7 @@ func _on_body_exited(body: Node2D) -> void:
 
 func open() -> void:
 	if mask_scene:
-		var mask = mask_scene.instantiate()
+		mask = mask_scene.instantiate()
 		GameState.add_mask(mask)
 	chest_open_sound.play()
 	animation_sprite.play(str("opening_", type))
@@ -60,3 +61,4 @@ func move_mask_to_player(animation_name: String) -> void:
 	
 func remove_mask_wrapper() -> void:
 	mask_wrapper.queue_free()
+	GameState.equip_mask(mask.type)

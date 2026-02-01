@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://csmw6ycqm5qk"]
 
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_pdtm5"]
-[ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="3_b3oru"]
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="4_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_pdpul"]
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
+[ext_resource type="PackedScene" uid="uid://cgva8huqrvmfu" path="res://items/masks/cheetah/cheetah.tscn" id="5_61w3m"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -23,5 +23,5 @@ follow_viewport_enabled = true
 [node name="Chest" parent="." unique_id=842528575 instance=ExtResource("4_pdpul")]
 position = Vector2(1621, 654)
 scale = Vector2(4, 4)
-mask_scene = ExtResource("3_b3oru")
+mask_scene = ExtResource("5_61w3m")
 type = "gold"

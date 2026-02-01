@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cgva8huqrvmfu"]
+
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_acrf2"]
+
+[node name="Cheetah" type="Sprite2D" unique_id=935193788]
+script = ExtResource("1_acrf2")
+type = "cheetah"
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"
