@@ -10,12 +10,12 @@ script = ExtResource("1_qr8c5")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1272911097]
 stream = ExtResource("2_4i6sl")
-volume_db = -5.0
+volume_db = -10.0
 
 [node name="FightMusic" type="AudioStreamPlayer" parent="." unique_id=1769749397]
 stream = ExtResource("3_yov6g")
-volume_db = -4.657
+volume_db = -10.0
 
 [node name="MainMenu" type="AudioStreamPlayer" parent="." unique_id=966910302]
 stream = ExtResource("4_hoore")
-volume_db = -5.433
+volume_db = -10.0
