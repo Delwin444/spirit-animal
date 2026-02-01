@@ -25,6 +25,7 @@ var health = max_health : set = set_health
 @onready var hurt_box : Area2D = %HurtBox
 
 func _ready() -> void:
+	GameState.mask_equipped.connect(_on_mask_change)
 	notice_area.body_entered.connect(behavior.body_endered_notice_area)
 	notice_area.body_exited.connect(behavior.body_exited_notice_area)
 	contact_damage_timer = Timer.new()
@@ -88,3 +89,9 @@ func die() -> void:
 	
 	if not animation_player or not animation_player.has_animation("death"):
 		queue_free()
+
+func _on_mask_change(mask_type: String):
+	if mask_type == GameState.MASK_TYPE_RAM:
+		set_collision_layer_value(1, false)
+	if not mask_type == GameState.MASK_TYPE_RAM:
+		set_collision_layer_value(1, true)

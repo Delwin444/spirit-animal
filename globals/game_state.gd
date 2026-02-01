@@ -18,6 +18,7 @@ const MAX_SCORE = 9999
 const MASK_TYPE_CHEETAH = "cheetah"
 const MASK_TYPE_KANGAROO = "kangaroo"
 const MASK_TYPE_LLAMA = "llama"
+const MASK_TYPE_RAM = "ram"
 
 
 
