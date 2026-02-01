@@ -136,12 +136,8 @@ func dash():
 	dash_sound.pitch_scale = pitch_change
 	dash_sound.play()
 
-	# Determine dash direction
-	if direction_x != 0:
-		dash_direction = Vector2(direction_x, 0)
-	else:
-		# Dash in facing direction if not moving
-		dash_direction = Vector2(-1 if animated_sprite.flip_h else 1, 0)
+	# Use the same reliable direction logic as ranged attacks
+	dash_direction = get_shoot_direction()
 
 func process_dash(delta: float) -> void:
 	dash_time_left -= delta

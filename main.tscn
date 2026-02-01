@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://csmw6ycqm5qk" path="res://levels/level1.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://2ipytf1qk2qe" path="res://ui/inventory.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dmlqxsdei0k6i" path="res://ui/hud.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=1022640720]
 script = ExtResource("1_h2yge")
@@ -31,3 +32,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Spirit" parent="." unique_id=1291073216 instance=ExtResource("5_lquwl")]
+position = Vector2(738, 814)

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://y4yvs0gdqw3a"]
+[gd_scene format=3 uid="uid://cwlcligejhbaa"]
 
 [ext_resource type="PackedScene" uid="uid://cfyr2rpa0h7tp" path="res://player/player.tscn" id="1_2amg0"]
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="2_5ser7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="5_d2fby"]
 [ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="6_5ser7"]
 [ext_resource type="PackedScene" uid="uid://cx7wnye000a7a" path="res://mobs/enemies/ranged/ranged.tscn" id="7_cpj4g"]
+[ext_resource type="PackedScene" uid="uid://b0pthl1wnxnmb" path="res://mobs/enemies/spirit_boss_01/spirit_boss.tscn" id="8_qdvjk"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -36,3 +37,6 @@ position = Vector2(1268, 702)
 
 [node name="Ranged" parent="." unique_id=47877258 instance=ExtResource("7_cpj4g")]
 position = Vector2(608, 850)
+
+[node name="Spirit2" parent="." unique_id=970190322 instance=ExtResource("8_qdvjk")]
+position = Vector2(764, 449)
