@@ -9,6 +9,7 @@ const WHITE_KEY = "white"
 const OLD_KEY = "old"
 const NORMAL_KEY = "normal"
 const GOLD_KEY = "gold"
+const SCORE_POINTS = 100
 enum chest_type {WHITE_KEY, OLD_KEY, NORMAL_KEY, GOLD_KEY}
 
 @onready var animation_sprite = %AnimatedSprite2D
@@ -48,6 +49,7 @@ func open() -> void:
 
 func add_mask_to_game_state() -> void:
 	GameState.add_mask(mask)
+	GameState.score += SCORE_POINTS
 
 
 func transfer_mask() -> void:
