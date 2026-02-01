@@ -2,6 +2,7 @@ extends Area2D
 
 @export var speed := 1200.0
 @export var lifetime := 2.0  # Seconds before auto-destroying
+@export var damage := 50
 
 var direction := Vector2.RIGHT
 var time_alive := 0.0
@@ -27,9 +28,8 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	# Hit something solid
-	if body.has_method("take_damage"):
-		body.take_damage(1)  # TODO: Replace with gamestate dmg
+	if body is Enemy:
+		body.get_damage(damage)
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
