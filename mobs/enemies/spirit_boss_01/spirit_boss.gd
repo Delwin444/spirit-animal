@@ -5,6 +5,7 @@ class_name Spirit_Boss
 @onready var openmouth = $Node2D/ClosedMouth
 @onready var open_mouth_small = $Node2D/OpenMouthSmall
 @onready var open_mouth_large = $Node2D/OpenMouthLarge
+@onready var projectile_spawn_point: Marker2D = $Node2D/ProjectileSpawnPoint
 
 var can_attack: bool = true
 var attack_cooldown: float = 1.0
@@ -17,6 +18,13 @@ var dashing := false
 var dash_time_left := 0.0
 var dash_cooldown_timer := 0.0
 var dash_direction := Vector2.ZERO
+
+# Projectile
+@export var projectile_scene: PackedScene = preload("res://mobs/enemies/spirit_boss_01/boss_projectile.tscn")
+@export var projectile_cooldown := 4.0
+@export var projectile_windup := 0.6
+var projectile_cooldown_timer := 0.0
+var is_shooting := false
 
 func _ready() -> void:
 	notice_area = %NoticeArea
@@ -33,15 +41,23 @@ func _physics_process(delta: float) -> void:
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
 	
+	# Update projectile cooldown timer
+	if projectile_cooldown_timer > 0:
+		projectile_cooldown_timer -= delta
+	
+	# Check if should shoot projectile
+	if should_shoot() and not is_shooting and not dashing and projectile_cooldown_timer <= 0:
+		shoot_projectile()
+	
 	# Check if should dash (e.g., when player is detected and cooldown ready)
-	if should_dash() and not dashing and dash_cooldown_timer <= 0:
+	if should_dash() and not dashing and not is_shooting and dash_cooldown_timer <= 0:
 		start_dash()
 	
 	# Process dash if active
 	if dashing:
 		process_dash(delta)
-	else:
-		# Normal behavior when not dashing
+	elif not is_shooting:
+		# Normal behavior when not dashing or shooting
 		super(delta)
 	
 	move_and_slide()
@@ -49,9 +65,68 @@ func _physics_process(delta: float) -> void:
 	update_facing_direction()
 	attack()
 
+func should_shoot() -> bool:
+	# Shoot if player is in notice range
+	if GameState.player and notice_area:
+		var player_in_range = false
+		for body in notice_area.get_overlapping_bodies():
+			if body == GameState.player:
+				player_in_range = true
+				break
+		return player_in_range
+	return false
+
+func shoot_projectile() -> void:
+	is_shooting = true
+	velocity = Vector2.ZERO  # Stop movement while shooting
+	
+	# Determine direction (left or right based on player position)
+	var shoot_direction := Vector2.RIGHT
+	if GameState.player:
+		shoot_direction = Vector2.RIGHT if GameState.player.global_position.x > global_position.x else Vector2.LEFT
+	else:
+		# Fallback to facing direction
+		shoot_direction = Vector2(sign(visual.scale.x), 0)
+	
+	# Show mouth animation (same logic as dash)
+	show_projectile_mouth_animation(shoot_direction)
+
+func show_projectile_mouth_animation(shoot_direction: Vector2) -> void:
+	# Open mouth large as windup
+	openmouth.visible = false
+	open_mouth_small.visible = false
+	open_mouth_large.visible = true
+	
+	# Wait for windup before spawning projectile
+	await get_tree().create_timer(projectile_windup).timeout
+	
+	# Spawn the projectile
+	if projectile_scene:
+		var projectile_instance = projectile_scene.instantiate()
+		
+		# Use spawn point if it exists, otherwise use boss position
+		if projectile_spawn_point:
+			projectile_instance.global_position = projectile_spawn_point.global_position
+		else:
+			projectile_instance.global_position = global_position
+		
+		projectile_instance.direction = shoot_direction
+		
+		get_parent().add_child(projectile_instance)
+	
+	# Keep mouth open for a bit longer (optional, adjust duration as needed)
+	await get_tree().create_timer(0.3).timeout
+	
+	# Close mouth
+	open_mouth_large.visible = false
+	openmouth.visible = true
+	is_shooting = false
+	
+	# Start cooldown
+	projectile_cooldown_timer = projectile_cooldown
+
 func should_dash() -> bool:
 	# Dash towards player if they're in notice range
-	# You can customize this condition based on your game logic
 	if GameState.player and notice_area:
 		var player_in_range = false
 		for body in notice_area.get_overlapping_bodies():

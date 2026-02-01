@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bhd5bed6vhkpu" path="res://mobs/enemies/spirit_boss_01/boss_mouth.png" id="2_4vpj7"]
 [ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="3_j6aa0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ums5h"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4vpj7"]
 texture = ExtResource("2_4vpj7")
 texture_region_size = Vector2i(1024, 1024)
 0:1/0 = 0
@@ -13,7 +13,7 @@ texture_region_size = Vector2i(1024, 1024)
 
 [sub_resource type="TileSet" id="TileSet_rgbyg"]
 tile_size = Vector2i(256, 256)
-sources/0 = SubResource("TileSetAtlasSource_ums5h")
+sources/0 = SubResource("TileSetAtlasSource_4vpj7")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
 radius = 1246.0679
@@ -119,7 +119,8 @@ _data = {
 collision_layer = 7
 collision_mask = 3
 script = ExtResource("1_4vpj7")
-fall_gravity = 15000
+fall_gravity = 50000
+max_fall_speed = 50000
 behavior = NodePath("Follow")
 movement_speed = 10000
 score_points = 1000

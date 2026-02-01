@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://blvgld3vebsgj"]
 
 [ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_8wsbx"]
-[ext_resource type="Texture2D" uid="uid://c6weecbnkuh0m" path="res://mobs/enemies/enemy_assets/Mask_SpriteSheet.png" id="2_j0kus"]
+[ext_resource type="Texture2D" uid="uid://bhd5bed6vhkpu" path="res://mobs/enemies/spirit_boss_01/boss_mouth.png" id="2_j0kus"]
 [ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="2_puyys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2osee"]
 texture = ExtResource("2_j0kus")
 texture_region_size = Vector2i(1024, 1024)
 0:1/0 = 0
+1:1/0 = 0
+1:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_f1wdp"]
+tile_size = Vector2i(256, 256)
 sources/0 = SubResource("TileSetAtlasSource_2osee")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
@@ -17,7 +20,7 @@ radius = 57.0
 height = 216.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
-radius = 250.0
+radius = 610.0074
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
 radius = 61.0
@@ -120,15 +123,34 @@ _data = {
 collision_layer = 7
 collision_mask = 3
 script = ExtResource("1_8wsbx")
+fall_gravity = 15000
 behavior = NodePath("Follow")
+movement_speed = 6000
 
-[node name="Node2D" type="Node2D" parent="." unique_id=936435608]
-scale = Vector2(0.99999994, 0.99999994)
+[node name="Node2D" type="Node2D" parent="." unique_id=226804168]
+position = Vector2(0, -20)
+scale = Vector2(0.4, 0.4)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D" unique_id=1693152622]
-scale = Vector2(0.2, 0.2)
-tile_map_data = PackedByteArray(0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0)
+[node name="ClosedMouth" type="TileMapLayer" parent="Node2D" unique_id=1628862476]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_f1wdp")
+rendering_quadrant_size = 512
+
+[node name="OpenMouthSmall" type="TileMapLayer" parent="Node2D" unique_id=1826605692]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_f1wdp")
+rendering_quadrant_size = 512
+
+[node name="OpenMouthLarge" type="TileMapLayer" parent="Node2D" unique_id=169626797]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0)
+tile_set = SubResource("TileSet_f1wdp")
+rendering_quadrant_size = 512
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
 position = Vector2(3, -1)
