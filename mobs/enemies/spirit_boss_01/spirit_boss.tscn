@@ -1,86 +1,29 @@
 [gd_scene format=3 uid="uid://b0pthl1wnxnmb"]
 
 [ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_ui7ij"]
-[ext_resource type="Texture2D" uid="uid://ruvrjnqrtiy2" path="res://icon.svg" id="2_ov1qc"]
 [ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="3_j6aa0"]
-[ext_resource type="Texture2D" uid="uid://dk70m6r4hutvx" path="res://player/player_assets/attack_temp/sword-2.png" id="4_aahmy"]
+[ext_resource type="Texture2D" uid="uid://c6weecbnkuh0m" path="res://mobs/enemies/enemy_assets/Mask_SpriteSheet.png" id="4_ildjm"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ums5h"]
+texture = ExtResource("4_ildjm")
+texture_region_size = Vector2i(1024, 1024)
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_rgbyg"]
+tile_size = Vector2i(256, 256)
+sources/0 = SubResource("TileSetAtlasSource_ums5h")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
-radius = 108.0
-height = 260.0
+radius = 115.0
+height = 418.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
-radius = 1084.8691
+radius = 367.1362
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_puyys"]
-radius = 98.0
-height = 242.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ildjm"]
-radius = 67.66937
-height = 242.4736
-
-[sub_resource type="Animation" id="Animation_ums5h"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_rgbyg"]
-resource_name = "boss_attack"
-length = 1.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.033333335, 0.73333335, 1.2333333, 1.4333333),
-"transitions": PackedFloat32Array(0.20306315, 0.4352752, 1, 0.20306315),
-"update": 0,
-"values": [Vector2(176.99997, 159), Vector2(18.000004, 68), Vector2(400, 68), Vector2(176.99997, 159)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 1.2, 1.4000001),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [1.0471976, 0.7853982, 0.7853982, 1.0471976]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4itl"]
-_data = {
-&"RESET": SubResource("Animation_ums5h"),
-&"boss_attack": SubResource("Animation_rgbyg")
-}
+radius = 156.0
+height = 536.0
 
 [sub_resource type="Animation" id="Animation_yfydh"]
 length = 0.001
@@ -170,13 +113,16 @@ _data = {
 script = ExtResource("1_ui7ij")
 behavior = NodePath("Follow")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
-position = Vector2(-3.8146973e-06, 3.8146973e-06)
-scale = Vector2(1.2734375, 1.9373664)
-texture = ExtResource("2_ov1qc")
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=339012746]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
+tile_set = SubResource("TileSet_rgbyg")
+rendering_quadrant_size = 512
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
-position = Vector2(0, -2)
+position = Vector2(19, -9)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_8wsbx")
 
 [node name="Follow" type="Node" parent="." unique_id=904195158]
@@ -187,7 +133,7 @@ script = ExtResource("3_j6aa0")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
-position = Vector2(-12, -3)
+position = Vector2(18, 3)
 shape = SubResource("CircleShape2D_puyys")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
@@ -196,24 +142,9 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
-position = Vector2(-2, -2)
+position = Vector2(20, -4)
+rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_puyys")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=691430006]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1193171376]
-position = Vector2(-156.05112, 100.62184)
-rotation = 0.773835
-shape = SubResource("CapsuleShape2D_ildjm")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=808372257]
-position = Vector2(-144.06943, 95.83552)
-rotation = 0.015920907
-scale = Vector2(0.5409266, 0.5396388)
-texture = ExtResource("4_aahmy")
-
-[node name="SweepAttackAnimator" type="AnimationPlayer" parent="Area2D" unique_id=1972097135]
-libraries/ = SubResource("AnimationLibrary_f4itl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=371047820]
 libraries/ = SubResource("AnimationLibrary_aahmy")
