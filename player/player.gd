@@ -85,6 +85,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	AudioController.switch_music("Music", 50, 50, true)
 	_transition_to_state(current_state)
 	GameState.player = self
 	

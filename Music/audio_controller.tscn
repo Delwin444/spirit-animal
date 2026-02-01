@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://8q3b3gcb1ygc"]
+
+[ext_resource type="Script" uid="uid://bf87jbj8w2ver" path="res://Music/audio_controller.gd" id="1_qr8c5"]
+[ext_resource type="AudioStream" uid="uid://kahyx80ge0f2" path="res://Music/Spirit_Animal_Ost_MainTheme.mp3" id="2_4i6sl"]
+[ext_resource type="AudioStream" uid="uid://bkbqgyw1tnllx" path="res://Music/OST_fightTheme.mp3" id="3_yov6g"]
+[ext_resource type="AudioStream" uid="uid://dt20diqq38xum" path="res://Music/OST_MainMenuTheme.mp3" id="4_hoore"]
+
+[node name="AudioController" type="Node2D" unique_id=1711358157]
+script = ExtResource("1_qr8c5")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1272911097]
+stream = ExtResource("2_4i6sl")
+volume_db = -5.0
+
+[node name="FightMusic" type="AudioStreamPlayer" parent="." unique_id=1769749397]
+stream = ExtResource("3_yov6g")
+volume_db = -4.657
+
+[node name="MainMenu" type="AudioStreamPlayer" parent="." unique_id=966910302]
+stream = ExtResource("4_hoore")
+volume_db = -5.433
