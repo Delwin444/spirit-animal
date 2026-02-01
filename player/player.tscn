@@ -10,10 +10,10 @@
 [ext_resource type="AudioStream" uid="uid://4bfd8chehlxv" path="res://player/SFX_WalkOnGrass_FixedVersion.mp3" id="8_rgyib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw30f"]
-size = Vector2(32, 13.125)
+size = Vector2(1008.7273, 634.18176)
 
 [sub_resource type="Animation" id="Animation_yw30f"]
-length = 0.001
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -21,10 +21,10 @@ tracks/0/path = NodePath(".:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [true]
+"values": []
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -33,10 +33,10 @@ tracks/1/path = NodePath("SwordSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [false]
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_qjkh3"]
@@ -74,10 +74,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qjkh3"]
-size = Vector2(13.75, 32)
+size = Vector2(693.1705, 1043.7727)
 
 [sub_resource type="Animation" id="Animation_boad6"]
-length = 0.001
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -138,10 +138,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
-size = Vector2(13, 27)
+size = Vector2(660.8296, 965.6363)
 
 [sub_resource type="Animation" id="Animation_2ieo8"]
-length = 0.001
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -202,10 +202,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kb6p2"]
-size = Vector2(30.75, 13.5)
+size = Vector2(1037.5796, 570.2385)
 
 [sub_resource type="Animation" id="Animation_wodsf"]
-length = 0.001
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -291,15 +291,15 @@ animation = &"Jump"
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
 
 [node name="SwordRight" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=460712776]
-position = Vector2(23.25, 4.9375)
+position = Vector2(950.18195, -49.45456)
 shape = SubResource("RectangleShape2D_yw30f")
 disabled = true
 
 [node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordRight" unique_id=1882493940]
 visible = false
-position = Vector2(3.249999, 0.7500005)
+position = Vector2(97.09078, 26.181831)
 rotation = 0.76821375
-scale = Vector2(0.06086439, 0.06086439)
+scale = Vector2(2.0187798, 2.0187798)
 texture = ExtResource("3_g1dw6")
 script = ExtResource("4_yw30f")
 
@@ -307,15 +307,15 @@ script = ExtResource("4_yw30f")
 libraries/ = SubResource("AnimationLibrary_g6k8r")
 
 [node name="SwordTop" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=1341506192]
-position = Vector2(0.25, -23)
+position = Vector2(0, -1130.4772)
 shape = SubResource("RectangleShape2D_qjkh3")
 disabled = true
 
 [node name="SwordSprite" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordTop" unique_id=673184695]
 visible = false
-position = Vector2(0.75, -2.750001)
+position = Vector2(23.27273, -114.6137)
 rotation = -0.7769586
-scale = Vector2(0.065122694, 0.065122694)
+scale = Vector2(2.0838528, 2.0838528)
 texture = ExtResource("3_g1dw6")
 script = ExtResource("4_yw30f")
 
@@ -323,15 +323,15 @@ script = ExtResource("4_yw30f")
 libraries/ = SubResource("AnimationLibrary_hg6s5")
 
 [node name="SwordBottom" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=907043114]
-position = Vector2(-0.25, 25.5)
+position = Vector2(0, 1012.3635)
 shape = SubResource("RectangleShape2D_8t03j")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordBottom" unique_id=2088313037]
 visible = false
-position = Vector2(-0.25, 3.750001)
+position = Vector2(-11.636475, 104.72724)
 rotation = 2.3594193
-scale = Vector2(0.059431177, 0.05886647)
+scale = Vector2(1.9067894, 2.001071)
 texture = ExtResource("3_g1dw6")
 
 [node name="BottomAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordBottom" unique_id=1093443220]
@@ -339,15 +339,15 @@ root_node = NodePath("../Sprite2D")
 libraries/ = SubResource("AnimationLibrary_yllr7")
 
 [node name="SwordLeft" type="CollisionShape2D" parent="AnimatedSprite2D/BasicAttack" unique_id=1599962281]
-position = Vector2(-23.125, 5)
+position = Vector2(-965.81824, -46.545464)
 shape = SubResource("RectangleShape2D_kb6p2")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D/BasicAttack/SwordLeft" unique_id=153824708]
 visible = false
-position = Vector2(-3.125, -0.5)
+position = Vector2(-116.36367, 0)
 rotation = 3.9293563
-scale = Vector2(0.062133823, 0.062133823)
+scale = Vector2(2.2065847, 2.2065847)
 texture = ExtResource("3_g1dw6")
 
 [node name="LeftAttackAnimation" type="AnimationPlayer" parent="AnimatedSprite2D/BasicAttack/SwordLeft" unique_id=2085217127]
