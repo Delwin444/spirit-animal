@@ -52,9 +52,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# Hit the player
-	if body == GameState.player:
-		if body.has_method("take_damage"):
-			body.take_damage(1)
+	if body is Player:
+		GameState.damage_to_player(5)
 		finish_projectile()
 
 func _on_area_entered(area: Area2D) -> void:

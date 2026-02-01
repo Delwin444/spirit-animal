@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cnewsmbe3gpnl"]
+[gd_scene format=3 uid="uid://ntdg8d4oyv8i"]
 
 [ext_resource type="Texture2D" uid="uid://y524km5ynoja" path="res://mobs/enemies/enemy_assets/boss_projectile.png" id="1_y77fo"]
 [ext_resource type="Script" uid="uid://cuucrcnymg1pb" path="res://mobs/enemies/spirit_boss_01/boss_projectile.gd" id="2_jbl37"]
@@ -32,6 +32,19 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y77fo"]
+radius = 220.12724
+
 [node name="BossProjectileSprite" type="AnimatedSprite2D" unique_id=157810417]
 sprite_frames = SubResource("SpriteFrames_4vgin")
 script = ExtResource("2_jbl37")
+speed = 1200.0
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=893565745]
+collision_layer = 3
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=897320258]
+shape = SubResource("CircleShape2D_y77fo")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_area_2d_body_entered"]
