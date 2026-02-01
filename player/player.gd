@@ -34,6 +34,7 @@ var jump_count := 0
 var max_jumps := 1
 
 var active_mask_sprite: Sprite2D;
+var active_mask: Mask;
 
 @onready var animated_sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var mask_position_marker: Marker2D = %MaskPositionMarker
@@ -291,6 +292,7 @@ func process_ground_state(delta: float) -> void:
 
 		flip_sprite(direction_x > 0.0)
 		animated_sprite.play("Run")
+		use_run_mask(true)
 
 		# Track ranged attack direction
 		last_move_direction = Vector2(direction_x, 0)
@@ -298,9 +300,18 @@ func process_ground_state(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
 
 		animated_sprite.play("Idle")
+		use_run_mask(false)
 
 	if not is_on_floor():
 		_transition_to_state(State.FALL)
+
+
+func use_run_mask(should_use_run_mask: bool) -> void:
+	if active_mask_sprite is Sprite2D:
+		if should_use_run_mask:
+			active_mask_sprite.texture = active_mask.run_sprite
+		if not should_use_run_mask:
+			active_mask_sprite.texture = active_mask.texture
 
 
 func flip_sprite(is_flip_h: bool) -> void:
@@ -309,6 +320,13 @@ func flip_sprite(is_flip_h: bool) -> void:
 		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x)
 	if not is_flip_h:
 		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x) * -1
+	if active_mask_sprite is Sprite2D:
+		active_mask_sprite.flip_h = !is_flip_h
+		
+		if is_flip_h:
+			active_mask_sprite.position.x = abs(projectile_spawn_point.position.x)
+		if not is_flip_h:
+			active_mask_sprite.position.x = abs(projectile_spawn_point.position.x) * -1
 
 
 
@@ -426,16 +444,26 @@ func collect_mask(mask: Mask) -> void:
 		
 	active_mask_sprite.texture = mask.texture
 	active_mask_sprite.position = mask_position_marker.position
-	active_mask_sprite.scale = mask.scale
+	active_mask_sprite.scale = Vector2(0.02, 0.02)
 	
 	if !active_mask_sprite.get_parent():
 		self.add_child(active_mask_sprite);
 
 
 func player_mask_equipped(mask_type: String) -> void:
+	apply_mask_sprite(mask_type)
 	handle_cheetah(mask_type)
 	handle_kangaroo(mask_type)
 	handle_llama(mask_type)
+
+
+func apply_mask_sprite(mask_type: String) -> void:
+	var mask: Mask = GameState.get_collected_mask_by_type(mask_type)
+	if not mask:
+		return
+	active_mask = mask
+	collect_mask(mask)
+	
 
 
 func handle_cheetah(mask_type: String) -> void:

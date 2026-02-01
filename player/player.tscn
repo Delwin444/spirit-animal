@@ -327,7 +327,7 @@ material = ExtResource("5_hg6s5")
 position = Vector2(0, -11)
 scale = Vector2(0.021484375, 0.021484377)
 sprite_frames = ExtResource("2_rkbax")
-animation = &"Jump"
+animation = &"Idle"
 
 [node name="BasicAttack" type="Area2D" parent="AnimatedSprite2D" unique_id=1917282740]
 
@@ -400,7 +400,7 @@ shape = SubResource("CapsuleShape2D_yw30f")
 
 [node name="MaskPositionMarker" type="Marker2D" parent="." unique_id=2033219103]
 unique_name_in_owner = true
-position = Vector2(0, -16)
+position = Vector2(-3, -14.285714)
 
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="." unique_id=957558765]
 unique_name_in_owner = true
