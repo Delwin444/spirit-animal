@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://b0pthl1wnxnmb"]
 
-[ext_resource type="Script" uid="uid://cic0cshbjelmj" path="res://mobs/enemies/spirit/spirit.gd" id="1_ui7ij"]
+[ext_resource type="Script" uid="uid://bl3tj8gj5041a" path="res://mobs/enemies/spirit_boss_01/spirit_boss.gd" id="1_4vpj7"]
+[ext_resource type="Texture2D" uid="uid://bhd5bed6vhkpu" path="res://mobs/enemies/spirit_boss_01/boss_mouth.png" id="2_4vpj7"]
 [ext_resource type="Script" uid="uid://dpcwgqsbr7bcu" path="res://mobs/enemies/behaviors/follow.gd" id="3_j6aa0"]
-[ext_resource type="Texture2D" uid="uid://c6weecbnkuh0m" path="res://mobs/enemies/enemy_assets/Mask_SpriteSheet.png" id="4_ildjm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ums5h"]
-texture = ExtResource("4_ildjm")
+texture = ExtResource("2_4vpj7")
 texture_region_size = Vector2i(1024, 1024)
 0:1/0 = 0
 1:1/0 = 0
+1:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_rgbyg"]
 tile_size = Vector2i(256, 256)
@@ -105,17 +106,43 @@ _data = {
 &"death": SubResource("Animation_npd7s")
 }
 
+[sub_resource type="Animation" id="Animation_4vpj7"]
+resource_name = "boss_long_dash_attack"
+length = 1.4
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ildjm"]
+_data = {
+&"boss_long_dash_attack": SubResource("Animation_4vpj7")
+}
+
 [node name="SpiritBoss" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
-script = ExtResource("1_ui7ij")
+script = ExtResource("1_4vpj7")
+fall_gravity = 15000
 behavior = NodePath("Follow")
+movement_speed = 10000
+score_points = 1000
 
 [node name="Node2D" type="Node2D" parent="." unique_id=807702952]
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D" unique_id=339012746]
+[node name="ClosedMouth" type="TileMapLayer" parent="Node2D" unique_id=339012746]
 position = Vector2(-40.81, -28.4)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
+tile_set = SubResource("TileSet_rgbyg")
+rendering_quadrant_size = 512
+
+[node name="OpenMouthSmall" type="TileMapLayer" parent="Node2D" unique_id=1082867496]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_rgbyg")
+rendering_quadrant_size = 512
+
+[node name="OpenMouthLarge" type="TileMapLayer" parent="Node2D" unique_id=818239487]
+position = Vector2(-40.81, -28.4)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_rgbyg")
 rendering_quadrant_size = 512
 
@@ -147,3 +174,6 @@ shape = SubResource("CapsuleShape2D_puyys")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=371047820]
 libraries/ = SubResource("AnimationLibrary_aahmy")
+
+[node name="BossAttackAnimationPlayer" type="AnimationPlayer" parent="." unique_id=141770919]
+libraries/ = SubResource("AnimationLibrary_ildjm")
