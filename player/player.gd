@@ -82,7 +82,6 @@ var last_move_direction := Vector2.RIGHT  # Track for projectile direction
 @onready var player_walk_sound = %sfx_playerWalk
 var rng = RandomNumberGenerator.new()
 
-	
 
 func _ready() -> void:
 	_transition_to_state(current_state)
@@ -99,7 +98,7 @@ func _process(delta: float) -> void:
 
 func attack():
 	var pitch_change = rng.randf_range(0.9, 1.1)
-	
+
 	if attacking:
 		return
 	attack_hit_sound.pitch_scale = pitch_change
@@ -127,7 +126,7 @@ func _on_attack_finished(anim_name: String) -> void:
 
 func dash():
 	var pitch_change = rng.randf_range(0.7, 1.3)
-	
+
 	if dashing or dash_cooldown_timer > 0:
 		return
 	
@@ -137,7 +136,7 @@ func dash():
 	dash_cooldown_timer = dash_cooldown
 	dash_sound.pitch_scale = pitch_change
 	dash_sound.play()
-	
+
 	# Determine dash direction
 	if direction_x != 0:
 		dash_direction = Vector2(direction_x, 0)
@@ -272,7 +271,7 @@ func calculate_fall_gravity(height: float, time_to_descent: float) -> float:
 	return (2.0 * height) / pow(time_to_descent, 2.0)
 
 
-func process_ground_state(delta: float) -> void:	
+func process_ground_state(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		jump(jump_speed)
 
@@ -283,7 +282,7 @@ func process_ground_state(delta: float) -> void:
 		## Need a Way to perma Play this, while is_moving true
 		player_walk_sound.play()
 
-		animated_sprite.flip_h = direction_x < 0.0
+		animated_sprite.flip_h = direction_x > 0.0
 		animated_sprite.play("Run")
 
 		# Track ranged attack direction
@@ -318,7 +317,6 @@ func process_jump_state(delta: float) -> void:
 	if direction_x != 0:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
-		animated_sprite.flip_h = direction_x < 0.0
 
 		last_move_direction = Vector2(direction_x, 0)
 
@@ -337,7 +335,7 @@ func process_fall_state(delta: float) -> void:
 	if direction_x != 0.0:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
-		animated_sprite.flip_h = direction_x < 0.0
+		animated_sprite.flip_h = direction_x > 0.0
 		
 		last_move_direction = Vector2(direction_x, 0)
 
@@ -346,8 +344,8 @@ func process_fall_state(delta: float) -> void:
 ## Performs a jump with specified force
 ## Handles both regular jumps and double jumps
 func jump(jump_force: float) -> void:
-	
-	var pitch_change = rng.randf_range(0.9, 1.1) 
+
+	var pitch_change = rng.randf_range(0.9, 1.1)
 
 	if current_state == State.GROUND:
 		# First jump from ground
@@ -366,8 +364,6 @@ func jump(jump_force: float) -> void:
 			jump_count = 2
 			player_jump_sound.pitch_scale = pitch_change
 			player_jump_sound.play()
-			animated_sprite.play("Jump")
-			play_tween_jump()
 
 	velocity.y = jump_force
 
@@ -391,34 +387,19 @@ func _transition_to_state(new_state: State) -> void:
 			floor_snap_length = 8.0
 
 			if previous_state == State.FALL:
-				play_tween_touch_ground()
 				jump_count = 0
 
 		State.JUMP:
 			floor_snap_length = 0.0
-			animated_sprite.play("Jump")
 
 		State.FALL:
 			floor_snap_length = 0.0
-			animated_sprite.play("Fall")
 
 			if previous_state == State.GROUND:
 				coyote_time_active = true
 				get_tree().create_timer(0.1).timeout.connect(func(): coyote_time_active = false)
 
 
-func play_tween_touch_ground() -> void:
-	var tween := create_tween()
-	tween.tween_property(animated_sprite, "scale", Vector2(1.1, 0.9), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2(0.9, 1.1), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
-
-
-func play_tween_jump() -> void:
-	var tween := create_tween()
-	tween.tween_property(animated_sprite, "scale", Vector2(1.2, 0.8), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2(0.8, 1.2), 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(animated_sprite, "scale", Vector2.ONE, 0.15)
 
 
 func collect_mask(mask: Mask) -> void:
