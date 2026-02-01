@@ -80,6 +80,7 @@ func shoot_projectile() -> void:
 	is_shooting = true
 	velocity = Vector2.ZERO  # Stop movement while shooting
 	
+	
 	# Determine direction (left or right based on player position)
 	var shoot_direction := Vector2.RIGHT
 	if GameState.player:
