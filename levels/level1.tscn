@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
 [ext_resource type="PackedScene" uid="uid://cgva8huqrvmfu" path="res://items/masks/cheetah/cheetah.tscn" id="5_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bw16bv02xj6mt" path="res://items/masks/kangaroo/kangaroo.tscn" id="6_pdpul"]
+[ext_resource type="PackedScene" uid="uid://b3u8mt5r8ofpf" path="res://items/masks/llama/llama.tscn" id="7_8hd6v"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -29,3 +30,8 @@ type = "gold"
 [node name="Chest_Kangaroo" parent="." unique_id=1615298487 instance=ExtResource("4_pdpul")]
 position = Vector2(472, 892)
 mask_scene = ExtResource("6_pdpul")
+
+[node name="Chest" parent="." unique_id=1483340339 instance=ExtResource("4_pdpul")]
+position = Vector2(1053, 885)
+mask_scene = ExtResource("7_8hd6v")
+type = "white"

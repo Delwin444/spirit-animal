@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b3u8mt5r8ofpf"]
+
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_cipvw"]
+
+[node name="Llama" type="Sprite2D" unique_id=1075297831]
+script = ExtResource("1_cipvw")
+type = "llama"
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

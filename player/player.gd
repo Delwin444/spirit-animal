@@ -78,6 +78,7 @@ var is_invincible = false
 @export var projectile_cooldown := 0.3
 var projectile_cooldown_timer := 0.0
 var last_move_direction := Vector2.RIGHT  # Track for projectile direction
+var can_shoot := false
 
 @onready var player_walk_sound = %sfx_playerWalk
 var rng = RandomNumberGenerator.new()
@@ -203,7 +204,7 @@ func _physics_process(delta: float) -> void:
 		attack()
 	
 	# CHECK PROJECTILE INPUT
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and can_shoot:
 		shoot_projectile()
 	
 	# Check for dash input
@@ -415,6 +416,7 @@ func collect_mask(mask: Mask) -> void:
 func player_mask_equipped(mask_type: String) -> void:
 	handle_cheetah(mask_type)
 	handle_kangaroo(mask_type)
+	handle_llama(mask_type)
 
 
 func handle_cheetah(mask_type: String) -> void:
@@ -429,3 +431,10 @@ func handle_kangaroo(mask_type: String) -> void:
 		max_jumps = 2
 	if not mask_type == GameState.MASK_TYPE_KANGAROO:
 		max_jumps = 1
+
+
+func handle_llama(mask_type: String) -> void:
+	if mask_type == GameState.MASK_TYPE_LLAMA:
+		can_shoot = true
+	if not mask_type == GameState.MASK_TYPE_LLAMA:
+		can_shoot = false
