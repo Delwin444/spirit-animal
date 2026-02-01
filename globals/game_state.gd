@@ -11,6 +11,7 @@ var player : Player = null;
 var max_player_health = 100
 var player_health : float = max_player_health : set = _set_player_health
 var equipped_mask_type : String : set = _set_equipped_mask_type
+const MASK_TYPE_CHEETAH = "cheetah"
 
 
 func add_mask(mask: Mask) -> void:

@@ -415,7 +415,7 @@ func collect_mask(mask: Mask) -> void:
 
 
 func player_mask_equipped(mask_type: String) -> void:
-	if mask_type == "cheetah":
+	if mask_type == GameState.MASK_TYPE_CHEETAH:
 		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent) * 1.5
-	if not mask_type == "cheetah":
+	if not mask_type == GameState.MASK_TYPE_CHEETAH:
 		max_speed = calculate_max_speed(jump_horizontal_distance, jump_time_to_peak, jump_time_to_descent)

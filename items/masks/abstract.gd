@@ -2,4 +2,6 @@ class_name Mask
 
 extends Sprite2D
 
-@export var type :String = "base"
+@export_enum(
+	GameState.MASK_TYPE_CHEETAH
+) var type : String
