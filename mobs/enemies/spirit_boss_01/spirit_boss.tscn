@@ -14,10 +14,6 @@ texture_region_size = Vector2i(1024, 1024)
 tile_size = Vector2i(256, 256)
 sources/0 = SubResource("TileSetAtlasSource_ums5h")
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8wsbx"]
-radius = 115.0
-height = 418.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_puyys"]
 radius = 367.1362
 
@@ -120,10 +116,8 @@ tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_rgbyg")
 rendering_quadrant_size = 512
 
-[node name="HitBox" type="CollisionShape2D" parent="." unique_id=1997082231]
-position = Vector2(19, -9)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_8wsbx")
+[node name="HitBox" type="CollisionPolygon2D" parent="." unique_id=201390301]
+polygon = PackedVector2Array(-232, 12, -203, -37, -21, -100, 217, -142, 218, -85, 267, -96, 231, 3, 267, 54, 237, 129, -154, 130, -235, 38)
 
 [node name="Follow" type="Node" parent="." unique_id=904195158]
 unique_name_in_owner = true
@@ -133,7 +127,7 @@ script = ExtResource("3_j6aa0")
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea" unique_id=1083893224]
-position = Vector2(18, 3)
+position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_puyys")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=174550537]
@@ -142,7 +136,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1079271552]
-position = Vector2(20, -4)
+position = Vector2(29, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_puyys")
 
