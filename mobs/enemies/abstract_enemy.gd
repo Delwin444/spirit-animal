@@ -7,7 +7,7 @@ extends CharacterBody2D
 var notice_area: Area2D
 var can_fly := false
 var contact_damage_timer : Timer
-@onready var health : float = max_health : set = set_health
+var damage_effect_tween : Tween
 
 
 @export var fall_gravity := 6000
@@ -21,6 +21,7 @@ var contact_damage_timer : Timer
 @export var score_points := 50
 
 
+@onready var health : float = max_health : set = set_health
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var hurt_box : Area2D = %HurtBox
 
@@ -79,6 +80,12 @@ func set_health(new_health: float) -> void:
 	health = max(0, new_health)
 	if health == 0:
 		die()
+	
+	if health > 0:
+		if not damage_effect_tween:
+			damage_effect_tween = get_tree().create_tween()
+		damage_effect_tween.tween_property(self, "modulate", Color(0.4, 0, 0), 0.2)
+		damage_effect_tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
 
 func die() -> void:
