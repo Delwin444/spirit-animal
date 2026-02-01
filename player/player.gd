@@ -281,7 +281,7 @@ func process_ground_state(delta: float) -> void:
 		## Need a Way to perma Play this, while is_moving true
 		player_walk_sound.play()
 
-		animated_sprite.flip_h = direction_x > 0.0
+		flip_sprite(direction_x > 0.0)
 		animated_sprite.play("Run")
 
 		# Track ranged attack direction
@@ -293,6 +293,14 @@ func process_ground_state(delta: float) -> void:
 
 	if not is_on_floor():
 		_transition_to_state(State.FALL)
+
+
+func flip_sprite(is_flip_h: bool) -> void:
+	animated_sprite.flip_h = is_flip_h
+	if is_flip_h:
+		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x)
+	if not is_flip_h:
+		projectile_spawn_point.position.x = abs(projectile_spawn_point.position.x) * -1
 
 
 
@@ -334,7 +342,7 @@ func process_fall_state(delta: float) -> void:
 	if direction_x != 0.0:
 		velocity.x += acceleration * direction_x * delta
 		velocity.x = clampf(velocity.x, -max_speed, max_speed)
-		animated_sprite.flip_h = direction_x > 0.0
+		flip_sprite(direction_x > 0.0)
 		
 		last_move_direction = Vector2(direction_x, 0)
 
