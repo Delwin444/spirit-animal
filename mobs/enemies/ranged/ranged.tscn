@@ -100,15 +100,11 @@ _data = {
 }
 
 [node name="Ranged" type="CharacterBody2D" unique_id=1291073216 node_paths=PackedStringArray("behavior")]
+collision_layer = 7
+collision_mask = 3
 script = ExtResource("1_yfydh")
-fall_gravity = null
-max_fall_speed = null
-contact_damage = null
-weapon_damage = null
-contact_damage_timeout = null
-movement_speed = 10000
-max_health = null
 behavior = NodePath("KeepDistance")
+movement_speed = 10000
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1329085895]
 scale = Vector2(0.546875, 1)

@@ -121,6 +121,13 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_51ch3")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hw2p5"]
+shader = ExtResource("1_yjvek")
+shader_parameter/tint_col = Color(0.54901963, 0.27450982, 0, 1)
+shader_parameter/position = Vector2(3500, 800)
+shader_parameter/radius = 1000.0
+shader_parameter/intensity = 1.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hw2p5"]
 texture = ExtResource("1_51ch3")
 texture_region_size = Vector2i(256, 256)
@@ -175,6 +182,7 @@ tile_set = SubResource("TileSet_hw2p5")
 rendering_quadrant_size = 512
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=1408502135]
+material = SubResource("ShaderMaterial_hw2p5")
 scale = Vector2(0.15, 0.15)
 tile_map_data = PackedByteArray("AAACABYAAAAAAAAAAAACABcAAAAAAAEAAAADABYAAAABAAAAAAADABcAAAABAAEAAAAEABYAAAACAAAAAAAEABcAAAACAAEAAAAFABYAAAADAAAAAAAFABcAAAADAAEAAAAUABYAAAAAAAIAAAAUABcAAAAAAAMAAAAVABYAAAABAAIAAAAVABcAAAABAAMAAAAWABYAAAACAAIAAAAWABcAAAACAAMAAAAIABcAAAAEAAAAAAAPABcAAAAFAAAAAAAMABcAAAAFAAAAAAAaABcAAAAGAAAAAAAKABcAAAAGAAAAAAAGABcAAAAHAAAAAAAYABcAAAAHAAAAAAAyABUAAAAHAAAAAAAnABEAAAAHAAAAAAAlABEAAAAHAAAAAAAqABEAAAAHAAAAAAA1ABUAAAAGAAAAAAApABEAAAAGAAAAAAAwABUAAAAEAAAAAAASABcAAAAFAAAAAAA=")
 tile_set = SubResource("TileSet_yjvek")

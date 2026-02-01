@@ -53,6 +53,9 @@ func add_mask_to_game_state() -> void:
 
 
 func transfer_mask() -> void:
+	var mask_node : Mask = mask_scene.instantiate()
+	mask_node.scale = Vector2(0.05, 0.05)
+	mask_wrapper.add_child(mask_node)
 	animation_player.play("mask_transfer")
 	animation_player.animation_finished.connect(move_mask_to_player)
 

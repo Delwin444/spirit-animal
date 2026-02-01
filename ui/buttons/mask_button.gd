@@ -14,8 +14,9 @@ func _on_pressed() -> void:
 	if (mask_type):
 		GameState.equip_mask(mask_type)
 
+
 func _on_mask_equipped(new_mask_type: String) -> void:
 	if new_mask_type == mask_type:
-		modulate = Color(0.7, 0.7, 0.7, 1)
-	if not new_mask_type == mask_type:
 		modulate = Color(1, 1, 1, 1)
+	if not new_mask_type == mask_type:
+		modulate = Color(0.6, 0.6, 0.6, 1)

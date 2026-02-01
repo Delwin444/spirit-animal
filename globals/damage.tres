@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dcfsu8dmcl22g"]
+
+[ext_resource type="Shader" uid="uid://buy3xdftifdeq" path="res://globals/damage.gdshader" id="1_fbg5e"]
+
+[resource]
+shader = ExtResource("1_fbg5e")
+shader_parameter/color = Color(0.6901961, 0, 0, 0.49803922)
+shader_parameter/intensity = 0.0
