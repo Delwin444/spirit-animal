@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bw3v5vg8x632"]
 
 [ext_resource type="Script" uid="uid://dv12u2olntnpg" path="res://items/chest/chest.gd" id="1_wbwwv"]
-[ext_resource type="PackedScene" uid="uid://ddkhpmphrlo7c" path="res://items/masks/abstract.tscn" id="2_4wvya"]
 [ext_resource type="Texture2D" uid="uid://tg3cskgplae6" path="res://items/chest/Chests.png" id="2_wbwwv"]
 [ext_resource type="AudioStream" uid="uid://dckj6umk7lisq" path="res://items/chest/OpenChestSFXLOUDER.mp3" id="4_1xkbt"]
 
@@ -419,14 +418,12 @@ shape = SubResource("CircleShape2D_1xkbt")
 unique_name_in_owner = true
 position = Vector2(0, 2)
 
-[node name="DefaultMask" parent="MaskWrapper" unique_id=1160054275 instance=ExtResource("2_4wvya")]
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=570771376]
 unique_name_in_owner = true
 position = Vector2(7, -7)
 sprite_frames = SubResource("SpriteFrames_vnwkl")
 animation = &"idle_normal"
-frame_progress = 0.13933401
+frame_progress = 0.30915505
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=475360470]
 unique_name_in_owner = true
