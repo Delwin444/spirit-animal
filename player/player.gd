@@ -86,7 +86,7 @@ var can_shoot := false
 
 @onready var player_walk_sound = %sfx_playerWalk
 var rng = RandomNumberGenerator.new()
-
+@onready var damage_animation_player = %DamageAnimation
 
 func _ready() -> void:
 	AudioController.switch_music("Music", 50, 50, true)
@@ -498,3 +498,10 @@ func handle_llama(mask_type: String) -> void:
 func _on_basic_attack_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		body.get_damage(melee_attack_dmg)
+
+
+func play_take_damage_effect() -> void:
+	damage_animation_player.play("damage")
+	await get_tree().create_timer(0.7).timeout
+	damage_animation_player.stop()
+	

@@ -32,6 +32,7 @@ func add_mask(mask: Mask) -> void:
 
 func damage_to_player(damage: float) -> void:
 	player_health -= damage
+	player.play_take_damage_effect()
 
 
 # can't use static typehinting, gdscript doesn't support nullable yet

@@ -432,6 +432,7 @@ stream = ExtResource("8_rgyib")
 volume_db = -9.711
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="." unique_id=1321243287]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_2ieo8")
 
 [connection signal="body_entered" from="AnimatedSprite2D/BasicAttack" to="." method="_on_basic_attack_body_entered"]
