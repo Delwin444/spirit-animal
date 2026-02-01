@@ -4,11 +4,13 @@
 
 [node name="ParallaxForeground" type="ParallaxBackground" unique_id=2123385024]
 layer = 100
+offset = Vector2(0, 10)
+transform = Transform2D(1, 0, 0, 1, 0, 10)
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=72736993]
 scroll_scale = Vector2(2.5, 2.5)
 repeat_size = Vector2(2395, 0)
-repeat_times = 3
+repeat_times = 20
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1498773269]
 texture = ExtResource("1_xtlm8")

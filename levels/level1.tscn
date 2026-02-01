@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cgva8huqrvmfu" path="res://items/masks/cheetah/cheetah.tscn" id="5_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bw16bv02xj6mt" path="res://items/masks/kangaroo/kangaroo.tscn" id="6_pdpul"]
 [ext_resource type="PackedScene" uid="uid://b3u8mt5r8ofpf" path="res://items/masks/llama/llama.tscn" id="7_8hd6v"]
+[ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="9_omn1t"]
+[ext_resource type="PackedScene" uid="uid://b0pthl1wnxnmb" path="res://mobs/enemies/spirit_boss_01/spirit_boss.tscn" id="10_lf3p4"]
+[ext_resource type="PackedScene" uid="uid://b7ddrr21v8qn7" path="res://items/masks/ram/ram.tscn" id="11_yydhl"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -26,15 +29,36 @@ follow_viewport_enabled = true
 [node name="TileMapLayer" parent="." unique_id=853132546 instance=ExtResource("4_61w3m")]
 
 [node name="Chest_Cheetah" parent="." unique_id=842528575 instance=ExtResource("4_pdpul")]
-position = Vector2(1621, 654)
+z_index = 10
+position = Vector2(4009, 957)
 mask_scene = ExtResource("5_61w3m")
 type = "gold"
 
 [node name="Chest_Kangaroo" parent="." unique_id=1615298487 instance=ExtResource("4_pdpul")]
-position = Vector2(472, 892)
+position = Vector2(5151, 578)
 mask_scene = ExtResource("6_pdpul")
 
 [node name="Chest" parent="." unique_id=1483340339 instance=ExtResource("4_pdpul")]
-position = Vector2(1053, 885)
+position = Vector2(6231, 962)
 mask_scene = ExtResource("7_8hd6v")
 type = "white"
+
+[node name="Spirit" parent="." unique_id=1291073216 instance=ExtResource("9_omn1t")]
+position = Vector2(3819, 924)
+
+[node name="Spirit2" parent="." unique_id=592080165 instance=ExtResource("9_omn1t")]
+position = Vector2(4914, 921)
+
+[node name="Spirit3" parent="." unique_id=116433412 instance=ExtResource("9_omn1t")]
+position = Vector2(7925, 858)
+
+[node name="Spirit4" parent="." unique_id=872066556 instance=ExtResource("9_omn1t")]
+position = Vector2(8173, 856)
+
+[node name="SpiritBoss" parent="." unique_id=2125448689 instance=ExtResource("10_lf3p4")]
+position = Vector2(11430, 767)
+
+[node name="Chest2" parent="." unique_id=1604225166 instance=ExtResource("4_pdpul")]
+position = Vector2(2894, 422)
+mask_scene = ExtResource("11_yydhl")
+type = "old"
