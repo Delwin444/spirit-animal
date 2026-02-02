@@ -11,8 +11,8 @@ func _ready() -> void:
 	mask_selection_audio_player = AudioStreamPlayer2D.new();
 	player_hurt_audio_player = AudioStreamPlayer2D.new();
 	player_hurt_audio_player.volume_db = 20
-	add_child(mask_selection_audio_player)
-	add_child(player_hurt_audio_player)
+	GameState.player.add_child(mask_selection_audio_player)
+	GameState.player.add_child(player_hurt_audio_player)
 
 
 func _process(_delta: float) -> void:
