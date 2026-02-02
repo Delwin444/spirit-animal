@@ -35,7 +35,6 @@ func truly_change_music():
 func switch_music(nextTrack, fadeOut, fadeIn, fade, duration: float = 1.0):
 	if nextTrack is String:
 		nextTrack = get_node(nextTrack)
-	var tween = get_tree().create_tween()
 	var _nextTrack = nextTrack
 	var fadeTimer = 0
 	var fade_in = false
@@ -44,6 +43,7 @@ func switch_music(nextTrack, fadeOut, fadeIn, fade, duration: float = 1.0):
 	trackToPlay = nextTrack
 	
 	if fade == true: 
+		var tween = get_tree().create_tween()
 		tween.tween_property(cur_track, "volume_db", -80.0, duration)
 		tween.tween_callback(truly_change_music)
 		fade = false;
