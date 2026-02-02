@@ -4,9 +4,13 @@ GGJ 2026 entry form Leipzig Germany
 
 Made in Godot within 48h (+ some bug fixing) in a team of 5 (3 devs, 1 artist and 1 sound designer)
 
+No vibe coding, not asset generation
+
 Check the ggj entry out on [https://globalgamejam.org/games/2026/spirit-animal-2](https://globalgamejam.org/games/2026/spirit-animal-2)
 
 Play it in browser: [https://delwin444.itch.io/spirit-animal](https://delwin444.itch.io/spirit-animal)
+
+![Spirit Animal Banner](banner.png)
 
 ## About
 
