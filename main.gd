@@ -35,6 +35,6 @@ func _on_mask_added(mask: Mask) -> void:
 	mask_selection_audio_player.stream = mask.selection_sound
 	mask_selection_audio_player.play()
 
-func _on_player_health_changed(new_health: float) -> void:
+func _on_player_health_changed(_new_health: float) -> void:
 	player_hurt_audio_player.stream = hurt_sound
 	player_hurt_audio_player.play()

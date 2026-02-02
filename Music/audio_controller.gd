@@ -32,13 +32,11 @@ func truly_change_music():
 	_cur_fading = true
 	switch_music(trackToPlay, 80, 80, false, 1.0)
 
-func switch_music(nextTrack, fadeOut, fadeIn, fade, duration: float = 1.0):
+func switch_music(nextTrack, _fadeOut, _fadeIn, fade, duration: float = 1.0):
 	if nextTrack is String:
 		nextTrack = get_node(nextTrack)
 	var _nextTrack = nextTrack
-	var fadeTimer = 0
 	var fade_in = false
-	var start_music = false
 	
 	trackToPlay = nextTrack
 	

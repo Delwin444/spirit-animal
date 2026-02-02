@@ -11,7 +11,7 @@ signal score_updated(score: float)
 var collected_masks := [];
 var player : Player = null;
 var max_player_health = 100
-var player_health : float = max_player_health : set = _set_player_health
+var player_health : int = max_player_health : set = _set_player_health
 var equipped_mask_type : String : set = _set_equipped_mask_type
 var score := 0 : set = _set_score
 var is_inventory_open := false
@@ -62,7 +62,7 @@ func _set_equipped_mask_type(new_mask_type: String) -> void:
 	mask_equipped.emit(new_mask_type)
 
 
-func _set_score(new_score: float) -> void:
+func _set_score(new_score: int) -> void:
 	new_score = min(new_score, MAX_SCORE)
 	score = new_score
 	score_updated.emit(score)

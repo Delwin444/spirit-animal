@@ -27,7 +27,7 @@ func _ready() -> void:
 	direction = direction.normalized()
 	
 	# Rotate to face direction (0 for right, 180 for left)
-	rotation = 0 if direction.x > 0 else PI
+	rotation = 0.0 if direction.x > 0 else PI
 	
 	# Flip sprite if needed instead of rotating
 	flip_h = direction.x < 0

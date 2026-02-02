@@ -68,7 +68,7 @@ func collision_hurt_player() -> void:
 	GameState.damage_to_player(contact_damage)
 
 
-func hurt(hurt_object: Area2D) -> void:
+func hurt(_hurt_object: Area2D) -> void:
 	get_damage(20)
 
 
