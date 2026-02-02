@@ -150,6 +150,9 @@ tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_rgbyg")
 rendering_quadrant_size = 512
 
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="Node2D" unique_id=1287014268]
+position = Vector2(-132, 61)
+
 [node name="HitBox" type="CollisionPolygon2D" parent="." unique_id=201390301]
 polygon = PackedVector2Array(-232, 12, -203, -37, -21, -100, 217, -142, 218, -85, 267, -96, 231, 3, 267, 54, 237, 129, -154, 130, -235, 38)
 
