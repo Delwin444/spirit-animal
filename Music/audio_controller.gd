@@ -22,7 +22,7 @@ func stop_music(track):
 
 
 func fade_in_music(player: AudioStreamPlayer, duration: float = 1.0):
-	var tween = create_tween()
+	var tween = get_tree().create_tween()
 	# Fade from current volume to -80db (silent)
 	tween.tween_property(player, "volume_db", -5, duration)
 
