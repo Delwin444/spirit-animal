@@ -31,7 +31,7 @@ func add_mask(mask: Mask) -> void:
 	mask_added.emit(mask)
 
 
-func damage_to_player(damage: float) -> void:
+func damage_to_player(damage: int) -> void:
 	player_health -= damage
 	player.play_take_damage_effect()
 
