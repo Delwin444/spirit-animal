@@ -82,13 +82,21 @@ func set_health(new_health: float) -> void:
 		die()
 	
 	if health > 0:
-		if not damage_effect_tween:
-			damage_effect_tween = get_tree().create_tween()
+		if damage_effect_tween:
+			damage_effect_tween.kill()
+		damage_effect_tween = get_tree().create_tween()
 		damage_effect_tween.tween_property(self, "modulate", Color(0.4, 0, 0), 0.2)
 		damage_effect_tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 
 
 func die() -> void:
+	var hitbox = get_node("HitBox")
+	if hitbox is CollisionShape2D:
+		hitbox.set_deferred("disabled", true)
+	var hurtbox = get_node("HurtBox/CollisionShape2D")
+	if hurtbox is CollisionShape2D:
+		hurtbox.set_deferred("disabled", true)
+		
 	if animation_player and animation_player.has_animation("death"):
 		animation_player.play("death")
 		GameState.score += score_points
