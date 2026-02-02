@@ -11,14 +11,12 @@ func _ready():
 
 
 func play_music(track): 
-	print(var_to_str(track))
 	track.play()
 	cur_track = track
 
 
 func stop_music(track):
 	track.stop()
-	print("TRACK STOPPED")
 
 
 func fade_in_music(player: AudioStreamPlayer, duration: float = 1.0):
@@ -33,7 +31,6 @@ func truly_change_music():
 	cur_track.stop()
 	_cur_fading = true
 	switch_music(trackToPlay, 80, 80, false, 1.0)
-	print("HELLO")
 
 func switch_music(nextTrack, fadeOut, fadeIn, fade, duration: float = 1.0):
 	if nextTrack is String:
@@ -49,17 +46,14 @@ func switch_music(nextTrack, fadeOut, fadeIn, fade, duration: float = 1.0):
 	if fade == true: 
 		tween.tween_property(cur_track, "volume_db", -80.0, duration)
 		tween.tween_callback(truly_change_music)
-		print("Currently Fading Away")
 		fade = false;
 	
 	if _cur_fading:
-		print("StartNextTrack")
 		fade_in = true
 		_cur_fading = false
 		play_music(_nextTrack)
 
 	
 	if fade_in:
-		print("FadeInNextTrack")
 		fade_in_music(_nextTrack, 1.0)
 		
