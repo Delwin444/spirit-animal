@@ -161,7 +161,6 @@ func process_dash(delta: float) -> void:
 	if dash_time_left <= 0:
 		dashing = false
 		is_invincible = false
-		print("Iframes over")
 		return
 	
 	# Set velocity to dash speed
