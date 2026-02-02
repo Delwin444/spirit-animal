@@ -92,10 +92,16 @@ func die() -> void:
 	if animation_player and animation_player.has_animation("death"):
 		animation_player.play("death")
 		GameState.score += score_points
-		animation_player.animation_finished.connect(queue_free)
+		animation_player.animation_finished.connect(_on_animation_finished)
 	
 	if not animation_player or not animation_player.has_animation("death"):
 		queue_free()
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	if animation_name == "death":
+		queue_free()
+
 
 func _on_mask_change(mask_type: String):
 	if mask_type == GameState.MASK_TYPE_RAM:
