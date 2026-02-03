@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_1i781"]
 [ext_resource type="Texture2D" uid="uid://cvxr1yv0r3oxs" path="res://items/masks/kangaroo/kangaroo_idle.png" id="1_tg5a5"]
 [ext_resource type="Texture2D" uid="uid://bb3qfswr4tar6" path="res://items/masks/kangaroo/kangaroo_run.png" id="3_o0sh7"]
+[ext_resource type="AudioStream" uid="uid://dqd8d3e5kcd55" path="res://items/masks/kangaroo/sfx_getMask_kangoroo.mp3" id="3_xplu6"]
 
 [node name="Kangaroo" type="Sprite2D" unique_id=1234086035]
 texture = ExtResource("1_tg5a5")
 script = ExtResource("1_1i781")
 type = "kangaroo"
+selection_sound = ExtResource("3_xplu6")
 run_sprite = ExtResource("3_o0sh7")
 metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

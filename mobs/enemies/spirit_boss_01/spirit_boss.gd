@@ -6,6 +6,7 @@ class_name Spirit_Boss
 @onready var open_mouth_small = $Node2D/OpenMouthSmall
 @onready var open_mouth_large = $Node2D/OpenMouthLarge
 @onready var projectile_spawn_point: Marker2D = $Node2D/ProjectileSpawnPoint
+@onready var switchBossMusic = false
 
 var can_attack: bool = true
 var attack_cooldown: float = 1.0
@@ -64,6 +65,10 @@ func _physics_process(delta: float) -> void:
 	handle_collisions()
 	update_facing_direction()
 	attack()
+	
+	
+	
+
 
 func should_shoot() -> bool:
 	# Shoot if player is in notice range
@@ -72,6 +77,9 @@ func should_shoot() -> bool:
 		for body in notice_area.get_overlapping_bodies():
 			if body == GameState.player:
 				player_in_range = true
+				if switchBossMusic == false:
+					AudioController.switch_music("FightMusic", 50, 50, true)
+					switchBossMusic = true
 				break
 		return player_in_range
 	return false
