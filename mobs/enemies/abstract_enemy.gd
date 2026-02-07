@@ -8,6 +8,7 @@ var notice_area: Area2D
 var can_fly := false
 var contact_damage_timer : Timer
 var damage_effect_tween : Tween
+var is_dying := false
 
 
 @export var fall_gravity := 6000
@@ -90,10 +91,15 @@ func set_health(new_health: float) -> void:
 
 
 func die() -> void:
+	if is_dying:
+		return
+		
+	is_dying = true
 	var hitbox = get_node("HitBox")
+	var hurtbox = get_node("HurtBox/CollisionShape2D")
+	
 	if hitbox is CollisionShape2D:
 		hitbox.set_deferred("disabled", true)
-	var hurtbox = get_node("HurtBox/CollisionShape2D")
 	if hurtbox is CollisionShape2D:
 		hurtbox.set_deferred("disabled", true)
 		
