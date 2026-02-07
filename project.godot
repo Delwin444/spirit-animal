@@ -13,6 +13,7 @@ config_version=5
 config/name="Spirit Animal"
 run/main_scene="uid://c5pyymbh725bn"
 config/features=PackedStringArray("4.6", "Mobile")
+boot_splash/image="uid://8e3ty7lkgtk1"
 config/icon="res://icon.svg"
 
 [autoload]
