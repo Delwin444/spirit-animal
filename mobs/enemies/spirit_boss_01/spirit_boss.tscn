@@ -184,3 +184,6 @@ libraries/ = SubResource("AnimationLibrary_aahmy")
 
 [node name="BossAttackAnimationPlayer" type="AnimationPlayer" parent="." unique_id=141770919]
 libraries/ = SubResource("AnimationLibrary_ildjm")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=66281282]
+rect = Rect2(-2367, -990, 4734, 1980)

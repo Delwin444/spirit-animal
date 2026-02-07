@@ -185,3 +185,7 @@ libraries/ = SubResource("AnimationLibrary_puyys")
 
 [node name="BasicAttackAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1027038421]
 libraries/ = SubResource("AnimationLibrary_j0kus")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1935127369]
+rect = Rect2(-537, -228, 1074, 456)
+show_rect = false
