@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Mask" format=3 uid="uid://b80uj8t1mp77g"]
+
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_c8ee5"]
+[ext_resource type="Texture2D" uid="uid://lyyy7qjnamh7" path="res://items/masks/ram/ram_idle.png" id="1_xau1i"]
+[ext_resource type="Texture2D" uid="uid://c7rnkyvy33yi3" path="res://items/masks/ram/ram_running.png" id="2_jd5r2"]
+[ext_resource type="AudioStream" uid="uid://d4ivnxiflbdd4" path="res://items/masks/ram/EquipGoatMaskSFX.mp3" id="4_faknx"]
+
+[resource]
+script = ExtResource("1_c8ee5")
+type = "ram"
+selection_sound = ExtResource("4_faknx")
+idle_sprite = ExtResource("1_xau1i")
+run_sprite = ExtResource("2_jd5r2")
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

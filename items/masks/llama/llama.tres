@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Mask" format=3 uid="uid://c2umjf7na1ehy"]
+
+[ext_resource type="Texture2D" uid="uid://d1kyd1iol2hvu" path="res://items/masks/llama/llama_idle.png" id="1_j8rt7"]
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_rrn8x"]
+[ext_resource type="Texture2D" uid="uid://c5w7j0kxisrgp" path="res://items/masks/llama/llama_run.png" id="2_erfg7"]
+[ext_resource type="AudioStream" uid="uid://c5ni51hi1wtbu" path="res://items/masks/llama/sfx_equip_lama.mp3" id="4_231ev"]
+
+[resource]
+script = ExtResource("1_rrn8x")
+type = "llama"
+selection_sound = ExtResource("4_231ev")
+idle_sprite = ExtResource("1_j8rt7")
+run_sprite = ExtResource("2_erfg7")
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

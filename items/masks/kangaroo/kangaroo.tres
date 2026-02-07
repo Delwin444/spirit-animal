@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Mask" format=3 uid="uid://du1r13jqi7hy6"]
+
+[ext_resource type="Texture2D" uid="uid://cvxr1yv0r3oxs" path="res://items/masks/kangaroo/kangaroo_idle.png" id="1_1wyun"]
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_njtrs"]
+[ext_resource type="Texture2D" uid="uid://bb3qfswr4tar6" path="res://items/masks/kangaroo/kangaroo_run.png" id="2_ich3g"]
+[ext_resource type="AudioStream" uid="uid://dqd8d3e5kcd55" path="res://items/masks/kangaroo/sfx_getMask_kangoroo.mp3" id="4_bn5dd"]
+
+[resource]
+script = ExtResource("1_njtrs")
+type = "kangaroo"
+selection_sound = ExtResource("4_bn5dd")
+idle_sprite = ExtResource("1_1wyun")
+run_sprite = ExtResource("2_ich3g")
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

@@ -423,7 +423,7 @@ unique_name_in_owner = true
 position = Vector2(7, -7)
 sprite_frames = SubResource("SpriteFrames_vnwkl")
 animation = &"idle_normal"
-frame_progress = 0.15870412
+frame_progress = 0.004198881
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=475360470]
 unique_name_in_owner = true

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Mask" format=3 uid="uid://b8cdin51poufr"]
+
+[ext_resource type="Script" uid="uid://dd7pi0yu1ibu2" path="res://items/masks/abstract.gd" id="1_8w3k8"]
+[ext_resource type="Texture2D" uid="uid://mdvylqg7h4es" path="res://items/masks/cheetah/cheetah_idle.png" id="1_21rkx"]
+[ext_resource type="Texture2D" uid="uid://b8wq6nfavdm1c" path="res://items/masks/cheetah/cheetah_run.png" id="2_e0law"]
+[ext_resource type="AudioStream" uid="uid://dssmn0n1sgtps" path="res://items/masks/cheetah/cheetah.mp3" id="4_4r8qb"]
+
+[resource]
+script = ExtResource("1_8w3k8")
+type = "cheetah"
+selection_sound = ExtResource("4_4r8qb")
+idle_sprite = ExtResource("1_21rkx")
+run_sprite = ExtResource("2_e0law")
+metadata/_custom_type_script = "uid://dd7pi0yu1ibu2"

@@ -318,7 +318,7 @@ func use_run_mask(should_use_run_mask: bool) -> void:
 		if should_use_run_mask:
 			active_mask_sprite.texture = active_mask.run_sprite
 		if not should_use_run_mask:
-			active_mask_sprite.texture = active_mask.texture
+			active_mask_sprite.texture = active_mask.idle_sprite
 
 
 func flip_sprite(is_flip_h: bool) -> void:
@@ -449,7 +449,7 @@ func collect_mask(mask: Mask) -> void:
 	if (active_mask_sprite is not Sprite2D):
 		active_mask_sprite = Sprite2D.new()
 		
-	active_mask_sprite.texture = mask.texture
+	active_mask_sprite.texture = mask.idle_sprite
 	active_mask_sprite.position = mask_position_marker.position
 	active_mask_sprite.scale = Vector2(0.02, 0.02)
 	

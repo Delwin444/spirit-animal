@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dmqsou4xb3ah3" path="res://levels/tile_map_layer.tscn" id="4_61w3m"]
 [ext_resource type="PackedScene" uid="uid://bw3v5vg8x632" path="res://items/chest/chest.tscn" id="4_pdpul"]
 [ext_resource type="PackedScene" uid="uid://bl5n6kt0j688g" path="res://levels/parallax_background.tscn" id="4_ua5ty"]
-[ext_resource type="PackedScene" uid="uid://cgva8huqrvmfu" path="res://items/masks/cheetah/cheetah.tscn" id="5_61w3m"]
-[ext_resource type="PackedScene" uid="uid://bw16bv02xj6mt" path="res://items/masks/kangaroo/kangaroo.tscn" id="6_pdpul"]
-[ext_resource type="PackedScene" uid="uid://b3u8mt5r8ofpf" path="res://items/masks/llama/llama.tscn" id="7_8hd6v"]
+[ext_resource type="Resource" uid="uid://b8cdin51poufr" path="res://items/masks/cheetah/cheetah.tres" id="6_yydhl"]
+[ext_resource type="Resource" uid="uid://du1r13jqi7hy6" path="res://items/masks/kangaroo/kangaroo.tres" id="7_bekh1"]
+[ext_resource type="Resource" uid="uid://c2umjf7na1ehy" path="res://items/masks/llama/llama.tres" id="8_8bcou"]
+[ext_resource type="Resource" uid="uid://b80uj8t1mp77g" path="res://items/masks/ram/ram.tres" id="9_f7u7y"]
 [ext_resource type="PackedScene" uid="uid://blvgld3vebsgj" path="res://mobs/enemies/spirit/spirit.tscn" id="9_omn1t"]
 [ext_resource type="PackedScene" uid="uid://b0pthl1wnxnmb" path="res://mobs/enemies/spirit_boss_01/spirit_boss.tscn" id="10_lf3p4"]
-[ext_resource type="PackedScene" uid="uid://b7ddrr21v8qn7" path="res://items/masks/ram/ram.tscn" id="11_yydhl"]
 
 [node name="Level1" type="Node2D" unique_id=1538598293]
 
@@ -32,17 +32,22 @@ layer = 0
 [node name="Chest_Cheetah" parent="." unique_id=842528575 instance=ExtResource("4_pdpul")]
 z_index = 10
 position = Vector2(4009, 957)
-mask_scene = ExtResource("5_61w3m")
+mask = ExtResource("6_yydhl")
 type = "gold"
 
 [node name="Chest_Kangaroo" parent="." unique_id=1615298487 instance=ExtResource("4_pdpul")]
 position = Vector2(5151, 578)
-mask_scene = ExtResource("6_pdpul")
+mask = ExtResource("7_bekh1")
 
-[node name="Chest" parent="." unique_id=1483340339 instance=ExtResource("4_pdpul")]
+[node name="Chest_Llama" parent="." unique_id=1483340339 instance=ExtResource("4_pdpul")]
 position = Vector2(6231, 962)
-mask_scene = ExtResource("7_8hd6v")
+mask = ExtResource("8_8bcou")
 type = "white"
+
+[node name="Chest_Ram" parent="." unique_id=1604225166 instance=ExtResource("4_pdpul")]
+position = Vector2(2894, 422)
+mask = ExtResource("9_f7u7y")
+type = "old"
 
 [node name="Spirit" parent="." unique_id=1291073216 instance=ExtResource("9_omn1t")]
 position = Vector2(3819, 924)
@@ -58,8 +63,3 @@ position = Vector2(8173, 856)
 
 [node name="SpiritBoss" parent="." unique_id=2125448689 instance=ExtResource("10_lf3p4")]
 position = Vector2(11430, 767)
-
-[node name="Chest2" parent="." unique_id=1604225166 instance=ExtResource("4_pdpul")]
-position = Vector2(2894, 422)
-mask_scene = ExtResource("11_yydhl")
-type = "old"
